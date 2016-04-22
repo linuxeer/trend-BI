@@ -1,0 +1,62 @@
+.charts-pages-container .page-list ul li a {
+    color: #fff;
+    font-weight: bold;
+}
+
+.value-bar {
+    width: 90%;
+    margin: 10px auto;
+    height: 10px;
+    background: #ccc;
+}
+
+.value-ball {
+    display: inline-block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 100%;
+    top: -5px;
+}
+
+.value-ball-before {
+    left: 0px;
+}
+
+.value-ball-after {
+    right: 0px;
+}
+
+.line-headers {
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.list-headers {
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.corn-headers {
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.line-headers div.grey, .list-headers div.grey, .corn-headers div.grey {
+    background: #ccc;
+}
+
+.line-headers div.white, .list-headers div.white, .corn-headers div.white {
+    background: #fff;
+}
+
+.line-headers div, .list-headers div {
+    float: left;
+    line-height: 28px;
+    border-right: 1px solid #ddd;
+}

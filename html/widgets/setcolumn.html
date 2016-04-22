@@ -1,0 +1,77 @@
+<div ng-show='model.showtab.measurement'>
+    <div class="setcolumn" ng-click='setcolumnshow = true' ng-init='setcolumnshow = false'>
+        <i class="glyphicon glyphicon-cog"></i>
+    </div>
+
+    <div class='setpage setcolumn-confirm' ng-show='setcolumnshow==true'>
+        <div class = 'close close-setcolumn' ng-click = 'setcolumnshow = false;chooosecolumnname="";choosecollist=[]'>
+            <i class = "icon-remove-circle"></i>
+        </div>
+        <div class = "modal-header">
+            <h3>字段设置</h3>
+        </div>
+        <ul class="nav nav-tabs setcolumntabs" ng-init='activesetcolumn = "transcol"'>
+            <li ng-click='activesetcolumn = "transcol"' ng-class='{"active":activesetcolumn=="transcol"}'><a href="javascript:void(0)">字段翻译</a></li>
+            <li ng-click='activesetcolumn = "addcol"' ng-class='{"active":activesetcolumn=="addcol"}'><a href="javascript:void(0)">字段增加</a></li>
+            <li ng-click='activesetcolumn ="delcol"' ng-class='{"active":activesetcolumn=="delcol"}'><a href="javascript:void(0)">字段删除</a></li>
+        </ul>
+        <div class="setcolumncon" ng-if='activesetcolumn = "transcol"'>
+            <div class = "setcolumnleft" ng-show = 'model.showtab.measurement'>
+
+                <ul class = "nav-list accordion-group" id = 'measuretop'>
+                    <li class = "nav-header">
+                        <a href = "javascript:void(0)">
+                        <i class = "icon icon-tasks"></i>
+                        度量<!-- {{showcolumn}} -->
+                        </a>
+                    </li>
+                    <li class = "rows">
+                        <div class = "draglist" ng-repeat = "measurement in model.showtab.measurement" data-txt = "{{measurement.columnDesc}}" tabletype = "{{measurement.tabletype}}" tabid = "{{measurement.tabid}}" fieldName="{{measurement.fieldName}}" columnid = "{{measurement.fieldName}}" fieldType="{{measurement.columnType}}" ng-click='columnclick(measurement.columnDesc,measurement.fieldName,measurement.columnType,measurement.tbId,measurement.tableType)'>
+                            <i class = "icon-columns"></i>
+                            {{measurement.columnDesc}}
+                        </div>
+                    </li>
+                </ul>
+                <ul class = "nav-list accordion-group" id = "dimensiontop">
+                    <li class = "nav-header">
+                        <a href = "javascript:void(0)">
+                        <i class = "icon icon-tasks"></i>
+                        维度
+                        </a>
+                    </li>
+                    <li class = "rows">
+                        <div class = "draglist" ng-repeat = "dimensionality in model.showtab.dimensionality" data-txt = "{{dimensionality.columnDesc}}" tabletype = "{{dimensionality.tabletype}}" tabid = "{{dimensionality.tabid}}" fieldName="{{dimensionality.fieldName}}" columnid = "{{dimensionality.fieldName}}" fieldType="{{dimensionality.columnType}}" ng-click='columnclick(dimensionality.columnDesc,dimensionality.fieldName,dimensionality.columnType,dimensionality.tbId,dimensionality.tableType)'>
+                            <i class = "icon-columns"></i>
+                            {{dimensionality.columnDesc}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="setcolumnright">
+                <div>
+                    <div class="alert alert-info" role="alert">注意：点击左边选择要翻译字段</div>
+                    <div class="choosecolname">所选这段名： <a href="javascript:void(0)">{{chooosecolumnname}}</a></div>
+                    <ul class='choosecolul clearfix'>
+                        <li>
+                            <span class='formerly green'>待译字段名</span>
+                            <span class='alias green'>别名</span>
+                        </li>
+                        <li>
+                            <span class='formerly green'>待译字段名</span>
+                            <span class='alias green'>别名</span>
+                        </li>
+                        <li ng-repeat='choosecol in choosecollist'>
+                            <span class='formerly'>{{choosecol.formerly}}</span>
+                            <input type='text' class='alias' value='{{choosecol.alias}}' ng-model='choosecol.alias'>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class = "modal-footer setcolumnbtns">
+                    <button class = "btn btn-default" ng-click='choosecancel()'>取消</button><button class = "btn btn-primary" ng-click='addPageSwitchMeaning()'>确定</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

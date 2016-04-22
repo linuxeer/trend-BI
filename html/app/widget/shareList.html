@@ -1,0 +1,17 @@
+<div class = "mt50">
+    <div ng-repeat = "role in roles">
+        <div class = "clearfix ml10 mb5">
+            <img src = "{{role.src}}" class = "fl w15" my-touchstart = "role_toogle($index)">
+            <b class = "fl ml5" style = "margin-left: 3px;" my-touchstart = "role_toogle($index)">{{role.roleName}}</b>
+        </div>
+        <ul class = "checkbox clearfix ml15 mt10">
+            <li class = "fl ml10 mb10" my-touchstart = "user_toogle($parent.$index,$index)" ng-repeat = "user in role.subUsers">
+                <img src = "{{user.src}}" class = "fl w15">
+                <b class = "fl ml5" style = "margin-left: 3px;">{{user.userName}}</b>
+            </li>
+        </ul>
+    </div>
+    <div class = "tc mt20">
+        <b style = "border-radius: 5px;padding:5px 15px;color:#000;background: #fff;" class = "ml10" ng-click = "share()">{{btnText}}</b>
+    </div>
+</div>

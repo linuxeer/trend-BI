@@ -1,0 +1,45 @@
+<div filter keydown-listen ng-delete-fn = "delete_fn($event)" class = "pa filter-box date-filter-box" style = "font-size: 13px;z-index: 1;">
+    <div ng-show = "filter.conditionId" class = "filter-box-module date-filter-title tc" style = "background: rgb(236, 240, 241);font-weight: bold;">
+        <b class = "ml20" ng-click = "prev_year()">|&#60;</b>
+        <b class = "ml10" ng-click = "prev_month()">&#60;</b>
+        <b class = "ml20">{{cur_year}} - {{cur_month}}</b>
+        <b class = "ml20" ng-click = "next_month()">&#62;</b>
+        <b class = "ml10" ng-click = "next_year()">&#62;|</b>
+    </div>
+    <div class = "filter-box-module" ng-show = "filter.conditionId">
+        <table class = "tc w table-bordered">
+            <thead style = "text-align: center;">
+                <th>日</th>
+                <th>一</th>
+                <th>二</th>
+                <th>三</th>
+                <th>四</th>
+                <th>五</th>
+                <th>六</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat = "arr in dates">
+                    <td ng-repeat = "d in arr" ng-class = "{unselectable:!d.selectable,selectable:d.selectable,selected:d.selected}" ng-click = "select($event,d)" title = "{{d.high ? '点击选择' : '无效日期'}}">
+                        {{d.n}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class = "filter-box-module" ng-show = "filter.conditionId">
+        <div class = "clearfix" style = "font-size: 12px;">
+            <label class = "fl ml10">
+                <input type = "radio" name = "optionsRadios" id = "optionsRadios1" value = "option1" ng-checked = "date_mode == 'day'" ng-click = "switch_date_mode('day')">
+                按天
+            </label>
+            <label class = "fl checked ml10">
+                <input type = "radio" name = "optionsRadios" id = "optionsRadios2" value = "option1" ng-checked = "date_mode == 'period'" ng-click = "switch_date_mode('period')">
+                按时间段
+            </label>
+            <label class = "fl ml10" ng-click = "confirm()" ng-show = "date_mode == 'period'">
+                <a href = "" class = "cp ml5" style = "color:#00a1cb;">确定</a>
+            </label>
+        </div>
+    </div>
+    <div ng-show = "!isPreviewing" ng-right-click = "rightclick()" move-able resize-able select-able class = "w h l0 t0 pa interactive" style = "left:0px;top:0px;z-index: 2"></div>
+</div>

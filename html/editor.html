@@ -1,0 +1,745 @@
+<div selectfalse>
+    <link href = "../css/editor.css" rel = "stylesheet">
+    <nav class = "navbar-inverse navbar-fixed-top navbar-collapse" role = "navigation">
+    <input type = 'hidden' class='imgsrc'>
+        <!-- <div class="navbar-header">
+        <a class="navbar-brand" href="#">W3Cschool</a>
+        </div> -->
+        <div class = "clearfix">
+            <ul class = "navbar-nav nav w80">
+                <!-- <li class = "">
+                    <a href = "javascript:void(0)" ng-click = "setnewpage()">
+                    <i class = "icon icon-file"></i>
+                    新建
+                    </a>
+                </li> -->
+                <!-- <li class = "">
+                    <a href = "javascript:void(0)" ng-click = "screenCapture()">
+                        <i class = "icon icon-file"></i>
+                        截屏
+                    </a>
+                </li> -->
+                <li>
+                    <a href = "javascript:void(0)" ng-click = "saveform()">
+                    <i class = "icon icon-save"></i>
+                    保存
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href = "#/system?pageid={{pageid}}">
+                    <i class = "icon icon-save"></i>
+                    预览
+                    </a> -->
+                    <!-- <a href = "javascript:void(0)" ng-click = "prewview()">
+                    <i class = "icon icon-save"></i>
+                    预览
+                    </a> -->
+                    <a href = "javascript:void(0)" ng-click = "viewclick();">
+                    <i class = "icon icon-save"></i>
+                    预览
+                    </a>
+                </li>
+                <li>
+                    <a href = "javascript:void(0)" ng-click = 'deletePage()'>
+                    <i class = "icon  icon-trash"></i>
+                    删除本页
+                    </a>
+                </li>
+                <!--  <li>
+                     <a href = "javascript:void(0)">
+                     <i class = "icon icon-reply"></i>
+                     撤销
+                     </a>
+                 </li> -->
+                <!-- <themelist></themelist> -->
+                <pagelist></pagelist>
+                <!-- <li>
+				    <a href = "javascript:void(0)" ng-click='setpagestyleclick()'>
+				    <i class = "icon icon-cog"></i>
+				    页面样式设置
+				    </a>
+				    
+				</li> -->
+                
+
+            </ul>
+            <ul class = "nav navbar-nav navbar-right">
+                <li>
+                    <a href = "javascript:void(0)" ng-click='sharepage()'>
+                    <i class = "icon icon-share"></i>
+                    分享
+                    </a>
+                </li>
+                <li>
+                    <a href = "#/index">
+                    <i class = "icon icon-reply"></i>
+                    返回
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href = "javascript:void(0)">
+                    <i class = "icon icon-user"></i>
+                    {{username}}
+                    </a>
+                </li> -->
+                <li class='dropdown'>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class = "icon icon-user"></i>{{username}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href = "login.html" class = "navbar-link">
+                                <i class = "icon icon-signout"></i>
+                                退出
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- <li>
+                    <a href = "login.html" class = "navbar-link">
+                    <i class = "icon icon-signout"></i>
+                    退出
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+    </nav>
+    <div class = "container-fluid content">
+        <confirm></confirm>
+        <share></share>
+        <!-- 页面弹框 -->
+        <div class = "setpage" ng-show = "setpage == true">
+            <div class = "modal-header">
+                <h3>
+                    页面设置
+                </h3>
+            </div>
+            <div class = "modal-body  clearfix">
+                <div class = "form-group clearfix">
+                    <label class = "col-sm-3 control-label pagelabel">
+                        页面名称
+                    </label>
+                    <div class = "col-sm-9 bdblue">
+                        <input type = "text" class = "form-control pagename" placeholder = "请输入页面名称">
+                    </div>
+                </div>
+                <div class = "form-group clearfix">
+                    <label class = "col-sm-3 control-label pagelabel">
+                        表格选择
+                    </label>
+                    <div class = "col-sm-9">
+                        <label class = "radio-inline radioml" ng-repeat = "tablename in model.tablist">
+                            <!-- <input type=" radio" class=" tabradio" name=" tbname" value=" {{tablename.tableDesc}}"
+                            ng-click=" choosetable(tablename.tabid)"> -->
+                            <input type = "radio" class = "tabradio" name = "tbname" value = "{{tablename.tabid}}" ng-click = "radiochk(tablename.tabid,tablename.tabletype)">
+                            {{tablename.tableDesc}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class = "modal-footer">
+                <button class = "btn" ng-click = "setpage = false">
+                    关闭
+                </button>
+                <button class = "btn btn-primary" ng-click = "savepage()">
+                    保存设置
+                </button>
+            </div>
+        </div>
+        <!-- 左边导航 -->
+
+        <div class = "sidebar-nav navbar-default sidebar-nav-left" ng-show = 'model.showtab.measurement'>
+
+            <ul class = "nav-list accordion-group" id = 'measuretop' ng-if='choosecharttype !="condition"'>
+                <li class = "nav-header">
+                    <a href = "javascript:void(0)">
+                    <i class = "icon icon-tasks"></i>
+                    度量<!-- {{showcolumn}} -->
+                    </a>
+                </li>
+                <li class = "rows">
+                    <div class = "draglist" ng-repeat = "measurement in model.showtab.measurement" draggable data-txt = "{{measurement.columnDesc}}" tabletype = "{{model.showtab.tabletype}}" tabid = "{{model.showtab.tabid}}" columnid = "{{measurement.fieldName}}" dragytext = 'true'>
+                        <i class = "icon-columns"></i>
+                        {{measurement.columnDesc}}
+                    </div>
+                </li>
+            </ul>
+            <!-- <ul class = "nav-list accordion-group" id = "dimensiontop" ng-if='choosecharttype != "SpeedometerInstrumentChart" && choosecharttype != "syncdata"'> -->
+            <ul class = "nav-list accordion-group" id = "dimensiontop" ng-if='choosecharttype !="condition"'>
+                <li class = "nav-header">
+                    <a href = "javascript:void(0)">
+                    <i class = "icon icon-tasks"></i>
+                    维度
+                    </a>
+                </li>
+                <li class = "rows">
+                    <div class = "draglist" ng-repeat = "dimensionality in model.showtab.dimensionality" draggable data-txt = "{{dimensionality.columnDesc}}" tabletype = "{{model.showtab.tabletype}}" tabid = "{{model.showtab.tabid}}" columnid = "{{dimensionality.fieldName}}" dragxtext = 'true'>
+                        <i class = "icon-columns"></i>
+                        {{dimensionality.columnDesc}}
+                    </div>
+                </li>
+            </ul>
+            <ul class = "nav-list accordion-group" id = "conditiontop" ng-if='choosecharttype =="condition"'>
+                <li class = "nav-header">
+                    <a href = "javascript:void(0)">
+                    <i class = "icon icon-tasks"></i>
+                    组件
+                    </a>
+                </li>
+                <li class = "rows">
+                    <div class = "draglist" ng-repeat = "condition in model.showtab.condition" draggable data-txt = "{{condition.columnDesc}}" tabletype = "{{condition.tableType}}" tabid = "{{condition.tbId}}" columnid = "{{condition.columnId}}" dragassemblytext = 'true'>
+                        <i class = "icon-columns"></i>
+                        {{condition.columnDesc}}
+                    </div>
+                </li>
+            </ul>
+            <!-- <div class="setcolumn" ng-click='setcolumnshow = true' ng-init='setcolumnshow = false'>
+                <i class="glyphicon glyphicon-cog"></i>
+            </div> -->
+
+            <!-- <div class="goback">
+                <i class='icon-th-large showgoicon'>
+                <div class="showgocon">
+                    <a href="javascript:void(0)" ng-click="gomeasure()" class="gomeasure">度量</a>
+                    <a href="javascript:void(0)" ng-click="godimension()" class="godimension">维度</a>
+                    <a href="javascript:void(0)" ng-click="gocondition()" class="gocondition">组件</a>
+                </div>
+                </i>
+            </div> -->
+
+        </div>
+        <div class = "colorchoose" ng-show = 'model.showtab.measurement'>
+            <div class = 'colortitle'>标记组--从维度拖拽字段</div>
+            <div ng-show = 'choosecharttype =="StandardPieChart" || choosecharttype =="summarytab" || choosecharttype =="crosstab" || choosecharttype =="detailtab" || choosecharttype =="condition"'>
+                该图表没有分类选项
+            </div>
+            <div class = "colorcon clearfix" id = "dragcolorx" ng-show = 'choosecharttype !="StandardPieChart" && choosecharttype !="summarytab" && choosecharttype !="crosstab" && choosecharttype !="detailtab" && choosecharttype !="condition"'>
+                <label class = "fl">分类:</label>
+                <!-- <input type="color" /> -->
+
+                <div droptext = 'true' droppable style = "height:34px;line-height:34px;">
+                    <div class = "inptext xydorpdown-toggle" tabletype = "{{dragcolorcon.tabletype}}" tabid = "{{dragcolorcon.tabid}}" columnid = "{{dragcolorcon.columnid}}" columntxt = "{{dragcolorcon.columntxt}}" ng-show = "dragcolorcon.columntxt" ng-repeat = "dragcolorcon in dragcolorcons">
+                        <img src = "../images/line.png" class = "xy-img">
+                        <em>
+                            {{dragcolorcon.columntxt}}
+                        </em>
+                        <multileveldrop></multileveldrop>
+                        <i class = "icon-sort-down xy-icon-down"></i>
+                    </div>
+                    <span ng-show = "dragcolorcons.length <= 0" class = "dragcolortip">拖拽到这里</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 右边导航 加z-index-->
+        <div class = "navbar-default sidebar-nav-right" ng-show = "savepagename == true" style="z-index:999">
+            <div class = 'sidebar-nav-right-con'>
+                <h3 class = "sidebar-nav-right-title">
+                    图表拖曳选择
+                </h3>
+                <ul class = "row">
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable dragimg = 'true' data-type = "StandardLineChart" title = "折线图">
+                        <img src = "../images/line.png" alt = "折线图">
+                        <span class = "pictitle">折线图</span>
+                        </a>
+                    </li>
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable dragimg = 'true' data-type = "StandardBarChart" title = "柱状图">
+                        <img src = "../images/bar.png" alt = "柱状图">
+                        <span class = "pictitle">柱状图</span>
+                        </a>
+                    </li>
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/pie.png" dragimg = 'true' data-type = "StandardPieChart" title = "扇形图">
+                        <img src = "../images/pie.png" alt = "扇形图">
+                        <span class = "pictitle">扇形图</span>
+                        </a>
+                    </li>
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/gauge.png" dragimg = 'true' data-type = "SpeedometerInstrumentChart" title = "仪表盘">
+                        <img src = "../images/gauge.png" alt = "仪表盘">
+                        <span class = "pictitle">仪表盘</span>
+                        </a>
+                    </li>
+                    <!-- <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/pie.png" dragimg = 'true' data-type = "StandardPieChart" title = "地图">
+                        <img src = "../images/map.png" alt = "地图">
+                        <span class = "pictitle">地图</span>
+                        </a>
+                    </li> -->
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/radar.png" dragimg = 'true' data-type = "StandardRadarChart" title = "雷达图">
+                        <img src = "../images/radar.png" alt = "雷达图">
+                        <span class = "pictitle">雷达图</span>
+                        </a>
+                    </li>
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/scatter.png" dragimg = 'true' data-type = "StandardScatterchart" title = "散点图">
+                        <img src = "../images/scatter.png" alt = "散点图">
+                        <span class = "pictitle">散点图</span>
+                        </a>
+                    </li>
+                    <!-- <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/pie.png" dragimg = 'true' data-type = "StandardPieChart" title = "树形图">
+                        <img src = "../images/treemap.png" alt = '树形图'>
+                        <span class = "pictitle">树形图</span>
+                        </a>
+                    </li> -->
+                    
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/pie.png" dragimg = 'true' data-type = "summarytab" title = "汇总表">
+                        <img src = "../images/summarytab.png" alt = "汇总表">
+                        <span class = "pictitle">汇总表</span>
+                        </a>
+                    </li>
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/pie.png" dragimg = 'true' data-type = "crosstab" title = "交叉表">
+                        <img src = "../images/crosstab.png" alt = "交叉表">
+                        <span class = "pictitle">交叉表</span>
+                        </a>
+                    </li>
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/pie.png" dragimg = 'true' data-type = "detailtab" title = "明细表">
+                        <img src = "../images/detailtab.png" alt = "明细表">
+                        <span class = "pictitle">明细表</span>
+                        </a>
+                    </li>
+                    <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/syncdata.png" dragimg = 'true' data-type = "syncdata" title = "动态数字">
+                        <img src = "../images/syncdata.png" alt = "动态数字">
+                        <span class = "pictitle">动态数字</span>
+                        </a>
+                    </li>
+                    <!-- <li class = "col-md-4">
+                        <a href = "javascript:void(0)" class = "thumbnail" draggable data-img = "../images/pie.png" dragimg = 'true' data-type = "StandardAreaChart" title = "矩形面积图">
+                            <img src = "../images/detailtab.png" alt = "矩形面积图">
+                            <span class = "pictitle">矩形面积图</span>
+                        </a>
+                    </li> -->
+                    
+                   <!--  <li class = "col-md-4" draggable data-img = "../images/line.png" dragassembly = 'true' data-assembly = "syncdata">
+                        <a href = "javascript:void(0)" class = "thumbnail" title = "动态数字">
+                        <img src = "../images/syncdata.png" alt = "动态数字">
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+            <div class = 'sidebar-nav-right-con'>
+                <h3 class = "sidebar-nav-right-title">
+                    组件拖曳选择
+                </h3>
+                <ul class = "row">
+                    <li class = "col-md-4" draggable data-img = "../images/line.png" dragassembly = 'true' data-assembly = "radio">
+                        <a href = "javascript:void(0)" class = "thumbnail" title = "单选">
+                        <img src = "../images/radio.png" alt = "单选">
+                        </a>
+                    </li>
+                    <li class = "col-md-4" draggable data-img = "../images/line.png" dragassembly = 'true' data-assembly = "checkbox">
+                        <a href = "javascript:void(0)" class = "thumbnail" title = "多选">
+                        <img src = "../images/checkbox.png" alt = "多选">
+                        </a>
+                    </li>
+                    <li class = "col-md-4" draggable data-img = "../images/line.png" dragassembly = 'true' data-assembly = "select">
+                        <a href = "javascript:void(0)" class = "thumbnail" title = "下拉">
+                        <img src = "../images/select.png" alt = "下拉">
+                        </a>
+                    </li>
+                    <li class = "col-md-4" draggable data-img = "../images/line.png" dragassembly = 'true' data-assembly = "date">
+                        <a href = "javascript:void(0)" class = "thumbnail" title = "日期">
+                        <img src = "../images/date.png" alt = "日期">
+                        </a>
+                    </li>
+                    <li class = "col-md-4" draggable data-img = "../images/line.png" dragassembly = 'true' data-assembly = "between">
+                        <a href = "javascript:void(0)" class = "thumbnail" title = "区间">
+                        <img src = "../images/between.png" alt = "区间">
+                        </a>
+                    </li>
+                    <li class = "col-md-4" draggable data-img = "../images/line.png" dragassembly = 'true' data-assembly = "note">
+                        <a href = "javascript:void(0)" class = "thumbnail" title = "文本">
+                        <img src = "../images/note.png" alt = "文本">
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+
+
+        <div ng-show = "savepagename == true" class = "main">
+            <div class = "drag-charts">
+                <div>
+                    <!-- xy -->
+                    <div class = "panel panel-default setxyhegiht">
+                        <div class = "panel-heading">
+                            <h3 class = "panel-title">
+                                {{xyfn.title}}
+                                <i class = "icon-sort-down fr"></i>
+                                <i class = "icon-random xychangeall fr hide" ng-click = 'xychangeall()' title = "交换x轴y轴顺序"></i>
+                                <i class = 'glyphicon glyphicon-erase delallxy' ng-click = 'delallxy()' title = "清空所选表格所有字段"></i>
+                                <!-- <i class='icon-share fr pageshare' ng-click='sharepage()'></i> -->
+                            </h3>
+                        </div>
+                        <div ng-show = "choosechart == true" class = "choosechartfalse">
+                            请先选中一个chart再进行操作
+                        </div>
+                        <div class = "panel-body form-horizontal" ng-show = "choosechart == false">
+                            <div class = "panel-body-xy clearfix" ng-show = "xyfn.xname" id = "chartx">
+                                <label class = "edlabel">
+                                    {{xyfn.xname}}：
+                                </label>
+
+                           
+                                <div class = "bdblue" ng-class = "{detailtab:showdetailtab == true,condition:choosecharttype == 'condition',standardscatterchart:choosecharttype=='StandardScatterchart'}" droptext = 'true' droppable>
+                                    <div class = "inptext xydorpdown-toggle" ng-repeat = 'xcolumn in xcolumns track by $index' tabletype = "{{xcolumn.tabletype}}" tabid = "{{xcolumn.tabid}}" columnid = "{{xcolumn.columnid}}" columntxt = "{{xcolumn.columntxt}}" dragxtext='{{xyfn.drag}}' draggable dindex='{{$index}}' data-txt='{{xcolumn.columntxt}}'>
+                                        <img src = "../images/line.png" class = "xy-img">
+                                        <em>
+                                            {{xcolumn.columntxt}}
+                                        </em>
+                                        <multileveldrop></multileveldrop>
+                                        <i class = "icon-sort-down xy-icon-down"></i>
+                                    </div>
+                                    <div class = "fr" ng-show = "(xcolumns.length >=2) && (choosecharttype == 'StandardLineChart' || choosecharttype == 'StandardBarChart' || choosecharttype == 'StandardPieChart')">
+                                        <label style="line-height:23px;">
+                                            <input type = 'checkbox' ng-model = 'isDrill' ng-click = 'triplevelchange(isDrill)'/>
+                                            层级下钻
+                                        </label>
+                                    </div>
+                                   <!--  <input type = 'text' class = "input-sm dragContentInput" droppable droptext = 'true' id = "implicationFieldName" readonly = "readonly"> -->
+                                </div>
+
+
+
+                                <!-- <div class = "bdblue" id = "chartx" ng-class = "{detailtab:showdetailtab == true,condition:choosecharttype == 'condition',standardscatterchart:choosecharttype=='StandardScatterchart'}">
+                                    <div class = "inptext xydorpdown-toggle" ng-repeat = 'xcolumn in xcolumns' tabletype = "{{xcolumn.tabletype}}" tabid = "{{xcolumn.tabid}}" columnid = "{{xcolumn.columnid}}" columntxt = "{{xcolumn.columntxt}}" dragxtext='{{xyfn.drag}}' draggable>
+                                        <img src = "../images/line.png" class = "xy-img">
+                                        <em>
+                                            {{xcolumn.columntxt}}
+                                        </em>
+                                        <multileveldrop></multileveldrop>
+                                        <i class = "icon-sort-down xy-icon-down"></i>
+                                    </div>
+                                    <div class = "fr" ng-show = "(xcolumns.length >=2) && (choosecharttype == 'StandardLineChart' || choosecharttype == 'StandardBarChart' || choosecharttype == 'StandardPieChart')">
+                                        <label>
+                                            <input type = 'checkbox' ng-model = 'isDrill' ng-click = 'triplevelchange(isDrill)'/>
+                                            层级下钻
+                                        </label>
+                                    </div>
+                                    <input type = 'text' class = "input-sm dragContentInput" droppable droptext = 'true' id = "implicationFieldName" readonly = "readonly">
+                                </div> -->
+                            </div>
+                            <div class = "panel-body-xy clearfix" ng-show = "xyfn.lname">
+                                <label class = "edlabel">
+                                    {{xyfn.lname}}：
+                                </label>
+                                <div class = "bdblue" id = "tablel">
+                                    <div class = "inptext xydorpdown-toggle" ng-repeat = 'lcolumn in lcolumns' tabletype = "{{lcolumn.tabletype}}" tabid = "{{lcolumn.tabid}}" columnid = "{{lcolumn.columnid}}" columntxt = "{{lcolumn.columntxt}}">
+                                        <img src = "../images/line.png" class = "xy-img">
+                                        <em>
+                                            {{lcolumn.columntxt}}
+                                        </em>
+                                        <multileveldrop></multileveldrop>
+                                        <i class = "icon-sort-down xy-icon-down"></i>
+                                    </div>
+                                    <input type = 'text' class = "input-sm dragContentInput" droppable droptext = 'true' readonly = "readonly">
+                                </div>
+                            </div>
+                            <div class = "panel-body-xy clearfix" ng-if = "(xyfn.yname) && (choosecharttype != 'StandardScatterchart')">
+                                <label class = "edlabel">
+                                    {{xyfn.yname}}：
+                                </label>
+                                <div class = "bdblue clearfix" id = "charty">
+                                    <div class = "inptext xydorpdown-toggle" ng-repeat = 'ycolumn in ycolumns' tabletype = "{{ycolumn.tabletype}}" tabid = "{{ycolumn.tabid}}" columnid = "{{ycolumn.columnid}}" columntxt = "{{ycolumn.columntxt}}" draggable>
+                                        <img src = "../images/line.png" class = "xy-img">
+                                        <em>
+                                            {{ycolumn.columntxt}}(
+                                            <span class = "xymetricname">{{ycolumn.xymetricname}}</span>
+                                            )
+                                        </em>
+                                        <multileveldrop></multileveldrop>
+                                        <i class = "icon-sort-down xy-icon-down"></i>
+                                    </div>
+                                    <input type = 'text' class = "input-sm dragContentInput" droppable droptext = 'true' id = "dataFieldName" readonly = "readonly">
+                                </div>
+                            </div>
+                            <!-- y轴没有度量选择 -->
+                            <div class = "panel-body-xy clearfix" ng-if = "(xyfn.yname) && (choosecharttype == 'StandardScatterchart')">
+                                <label class = "edlabel">
+                                    {{xyfn.yname}}：
+                                </label>
+                                <div class = "bdblue clearfix hidemetric" id = "charty">
+                                    <div class = "inptext xydorpdown-toggle" ng-repeat = 'ycolumn in ycolumns' tabletype = "{{ycolumn.tabletype}}" tabid = "{{ycolumn.tabid}}" columnid = "{{ycolumn.columnid}}" columntxt = "{{ycolumn.columntxt}}">
+                                        <img src = "../images/line.png" class = "xy-img">
+                                        <em>
+                                            {{ycolumn.columntxt}}
+                                        </em>
+                                        <multileveldrop></multileveldrop>
+                                        <i class = "icon-sort-down xy-icon-down"></i>
+                                    </div>
+                                    <input type = 'text' class = "input-sm dragContentInput" droppable droptext = 'true' id = "dataFieldName" readonly = "readonly">
+                                </div>
+                            </div>
+                            <!-- 数据值：绝对值，同比，环比 -->
+                            <!-- <div class = "panel-body-xy clearfix">
+                                <label class = "edlabel">
+                                    数据值：
+                                </label>
+                                <div class = "bdblue">
+                                    <label class="radio-inline radioml">
+                                        <input type="radio" class="tabradio" name="datavalue" value="abvalue" ng-model='datavalue'>
+                                        绝对值
+                                    </label>
+                                    <label class="radio-inline radioml">
+                                        <input type="radio" class="tabradio" name="datavalue" value="anvalue" ng-model='datavalue'>
+                                        同比
+                                    </label>
+                                    <label class="radio-inline radioml">
+                                        <input type="radio" class="tabradio" name="datavalue" value="" ng-model='datavalue'>
+                                        环比
+                                    </label>
+                                </div>
+                            </div> -->
+
+                            <div class='label-group clearfix'>
+                                <div class = "panel-body-xy clearfix label-group-left" ng-show="choosecharttype == 'syncdata'">
+                                    <label class = "edlabel">
+                                        对齐方式：
+                                    </label>
+                                    <div class = "bdblue">
+                                        <label class="radio-inline radioml">
+                                            <input type="radio" class="tabradio" name="textAlign" value="left" ng-model='syncdata.textAlign'>
+                                            左对齐
+                                        </label>
+                                        <label class="radio-inline radioml">
+                                            <input type="radio" class="tabradio" name="textAlign" value="right" ng-model='syncdata.textAlign'>
+                                            右对齐
+                                        </label>
+                                        <label class="radio-inline radioml">
+                                            <input type="radio" class="tabradio" name="textAlign" value="center" ng-model='syncdata.textAlign'>
+                                            中间对齐
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class = "panel-body-xy clearfix label-group-right" ng-show="choosecharttype == 'syncdata'">
+                                    <label class = "edlabel">
+                                        背景颜色：
+                                    </label>
+                                    <div class = "bdblue">
+                                        <label class="radio-inline radioml">
+                                            <input type="color" value='' ng-model='syncdata.background'>
+                                        </label>
+                                       
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="label-group clearfix">
+                                <div class = "panel-body-xy clearfix label-group-left" ng-show="choosecharttype == 'syncdata'">
+                                    <label class = "edlabel">
+                                        字体大小：
+                                    </label>
+                                    <div class = "bdblue">
+                                        <label class="radio-inline radioml" style='font-size:12px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="12px" ng-model='syncdata.fontSize'>
+                                            12px
+                                        </label>
+                                        <label class="radio-inline radioml" style='font-size:14px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="14px" ng-model='syncdata.fontSize'>
+                                            14px
+                                        </label>
+                                        <label class="radio-inline radioml" style='font-size:16px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="16px" ng-model='syncdata.fontSize'>
+                                            16px
+                                        </label>
+                                        <label class="radio-inline radioml" style='font-size:18px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="18px" ng-model='syncdata.fontSize'>
+                                            18px
+                                        </label>
+                                        <label class="radio-inline radioml" style='font-size:20px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="20px" ng-model='syncdata.fontSize'>
+                                            20px
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class = "panel-body-xy clearfix label-group-right" ng-show="choosecharttype == 'syncdata'">
+                                    <label class = "edlabel">
+                                        字体颜色：
+                                    </label>
+                                    <div class = "bdblue">
+                                        <label class="radio-inline radioml">
+                                            <input type="color" value='#333333' ng-model='syncdata.color'>
+                                        </label>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+
+                            <div class = "panel-body-xy clearfix" ng-show="choosecharttype == 'note'">
+                                <label class = "edlabel">
+                                    文本名：
+                                </label>
+                                <div class = "bdblue clearfix">
+                                    <input type = 'text' class = "input-sm dragContentInput" style="width:100%" ng-model='note.notetext'>
+                                </div>
+                            </div>
+                            <div class='label-group clearfix'>
+                                <div class = "panel-body-xy clearfix label-group-left" ng-show="choosecharttype == 'note'">
+                                    <label class = "edlabel">
+                                        对齐方式：
+                                    </label>
+                                    <div class = "bdblue">
+                                        <label class="radio-inline radioml">
+                                            <input type="radio" class="tabradio" name="textAlign" value="left" ng-model='note.textAlign'>
+                                            左对齐
+                                        </label>
+                                        <label class="radio-inline radioml">
+                                            <input type="radio" class="tabradio" name="textAlign" value="right" ng-model='note.textAlign'>
+                                            右对齐
+                                        </label>
+                                        <label class="radio-inline radioml">
+                                            <input type="radio" class="tabradio" name="textAlign" value="center" ng-model='note.textAlign'>
+                                            中间对齐
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class = "panel-body-xy clearfix label-group-right" ng-show="choosecharttype == 'note'">
+                                    <label class = "edlabel">
+                                        背景颜色：
+                                    </label>
+                                    <div class = "bdblue">
+                                        <label class="radio-inline radioml">
+                                            <input type="color" value='' ng-model='note.background'>
+                                        </label>
+                                       
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="label-group clearfix">
+                                <div class = "panel-body-xy clearfix label-group-left" ng-show="choosecharttype == 'note'">
+                                    <label class = "edlabel">
+                                        字体大小：
+                                    </label>
+                                    <div class = "bdblue">
+                                        <label class="radio-inline radioml" style='font-size:12px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="12px" ng-model='note.fontSize'>
+                                            12px
+                                        </label>
+                                        <label class="radio-inline radioml" style='font-size:14px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="14px" ng-model='note.fontSize'>
+                                            14px
+                                        </label>
+                                        <label class="radio-inline radioml" style='font-size:16px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="16px" ng-model='note.fontSize'>
+                                            16px
+                                        </label>
+                                        <label class="radio-inline radioml" style='font-size:18px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="18px" ng-model='note.fontSize'>
+                                            18px
+                                        </label>
+                                        <label class="radio-inline radioml" style='font-size:20px;'>
+                                            <input type="radio" class="tabradio" name="fontSize" value="20px" ng-model='note.fontSize'>
+                                            20px
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class = "panel-body-xy clearfix label-group-right" ng-show="choosecharttype == 'note'">
+                                    <label class = "edlabel">
+                                        字体颜色：
+                                    </label>
+                                    <div class = "bdblue">
+                                        <label class="radio-inline radioml">
+                                            <input type="color" value='#333333' ng-model='note.color'>
+                                        </label>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+
+                            <!-- <div class = "panel-body-xy clearfix" ng-show="choosecharttype == 'StandardLineChart' || choosecharttype == 'StandardBarChart' || choosecharttype == 'StandardPieChart'">
+                                <label class = "edlabel">
+                                </label>
+                                <div class = "bdblue bdnone clearfix">
+                                    <label><input type = 'checkbox' ng-model='isDrill' ng-click = 'triplevelchange(isDrill)'/>是否层级下钻</label>
+                                </div>
+                            </div> -->
+                            <!-- 仪表盘区间 -->
+                            <div class="label-group clearfix">
+                                <div class = "panel-body-xy clearfix" ng-show="choosecharttype == 'SpeedometerInstrumentChart'">
+                                    <label class = "edlabel">
+                                        区间设置：
+                                    </label>
+                                    <div class = "bdblue">
+                                        
+                                        <input type="number" class='speedometerinstrument-inp' ng-class = "{error:speedometerinstrumentinp.classname == 'error'}" ng-repeat='speedometerinstrumentinp in speedometerinstrumentinplist track by $index' value='' ng-model='speedometerinstrumentinp.num' />
+                                        <i class='icon-minus-sign del-input' ng-click='speedometerinstrumentDel()'></i>
+                                        <i class='icon-plus-sign add-input' ng-click='speedometerinstrumentAdd()'></i>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="label-group clearfix">
+                                <div class = "panel-body-xy clearfix" ng-show="choosecharttype == 'SpeedometerInstrumentChart'">
+                                    <label class = "edlabel">
+                                       
+                                    </label>
+                                    <div class = "bdblue bdnone">
+                                        <button type='button' class="btn btn-primary SpeedometerInstrumentsubmit" ng-click="SpeedometerInstrumentsubmit()">确定提交</button>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- 仪表盘区间 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "conbody" ng-class = "{system:showsystem == true}" id="EventScroll">
+                <div style = "min-height:400px" class = "drag-content pr" datekeys droppable dropimg = 'true' drawline id = "charts-container">
+
+                    <chart data-left = "{{chart.left}}" data-top = "{{chart.top}}" data-width = "{{chart.width}}" data-height = "{{chart.height}}" data-moduleId = "{{chart.moduleId || 0}}" data-type = "{{chart.chartType}}" data-identifier = "{{chart.identifier}}" ng-repeat = "chart in chartlist track by $index" ng-if='chart.del != true'></chart>
+
+                    <sheet data-left = "{{table.left}}" data-top = "{{table.top}}" data-width = "{{table.width}}" data-height = "{{table.height}}" data-moduleId = "{{table.moduleId}}" data-type = "{{table.chartType}}" data-identifier = "{{table.identifier}}" ng-repeat = "table in sheetlist track by $index" ng-if='table.del != true'></sheet>
+
+                    <radio-filter data-left = "{{radio.left}}" data-top = "{{radio.top}}" data-width = "{{radio.width}}" data-height = "{{radio.height}}" data-type = "{{radio.chartType}}" data-conditionId = "{{radio.conditionId}}" data-identifier = "{{radio.identifier}}" ng-repeat = 'radio in radiolist track by $index' ng-if='radio.del != true'></radio-filter>
+
+                    <select-filter data-left = "{{select.left}}" data-top = "{{select.top}}" data-width = "{{select.width}}" data-height = "{{6}}" data-type = "{{select.chartType}}" data-conditionId = "{{select.conditionId}}" data-identifier = "{{select.identifier}}" ng-repeat = 'select in selectlist track by $index' ng-if='select.del != true'></select-filter>
+
+                    <check-box-filter data-left = "{{checkbox.left}}" data-top = "{{checkbox.top}}" data-width = "{{checkbox.width}}" data-height = "{{checkbox.height}}" data-type = "{{checkbox.chartType}}" data-conditionId = "{{checkbox.conditionId}}" data-identifier = "{{checkbox.identifier}}" ng-repeat = 'checkbox in checkboxlist track by $index' ng-if='checkbox.del != true'></check-box-filter>
+
+                    <value-filter data-left = "{{between.left}}" data-top = "{{between.top}}" data-width = "{{between.width}}" data-height = "{{5}}" data-type = "{{between.chartType}}" data-conditionId = "{{between.conditionId}}" data-identifier = "{{between.identifier}}" ng-repeat = 'between in betweenlist track by $index' ng-if='between.del != true'></value-filter>
+
+                    <date-filter data-left = "{{date.left}}" data-top = "{{date.top}}" data-width = "{{date.width}}" data-height = "{{15}}" data-type = "{{date.chartType}}" data-conditionId = "{{date.conditionId}}" data-identifier = "{{date.identifier}}" ng-repeat = 'date in datelist track by $index' ng-if='date.del != true'></date-filter>
+
+                    <note data-left = "{{note.left}}" data-top = "{{note.top}}" data-width = "{{note.width}}" data-height = "{{3}}" data-type = "{{note.chartType}}" data-conditionId = "{{note.conditionId}}" data-identifier = "{{note.identifier}}" ng-repeat = 'note in notelist track by $index' ng-if='note.del != true' data-text='{{note.text}}'></note>
+
+                    <syncdata data-left = "{{syncdata.left}}" data-top = "{{syncdata.top}}" data-width = "{{syncdata.width}}" data-height = "{{syncdata.height}}" data-type = "{{syncdata.chartType}}" data-moduleId = "{{syncdata.moduleId || 0}}" data-identifier = "{{syncdata.identifier}}" ng-repeat = 'syncdata in syncdatalist track by $index' ng-if='syncdata.del != true'></syncdata>
+                </div>
+            </div>
+            <div class = 'closesystem' ng-show = 'showsystem == true' ng-click = 'closesystem()'>
+                <i class = "icon-remove"></i>
+            </div>
+        </div>
+        <div class = "modal-backdrop fade in" ng-show = "setpage == true || showsystem == true || saveformclick == true || setcolumnshow == true || showpagestyle == true || shareshow == true" ng-class = '{bgwhite:showsystem == true}'>
+            <div ng-show='saveformclick == true'>
+                <h5 class='savepagetitle'>正在为您保存页面</h5>
+                <div class="progress saveprogress" >
+                    <div class="saveprogressbar">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- 左上角字段设置 -->
+        <div setcolumn></div>
+        <div setpagestyle></div>
+    </div>
+    <!-- 白色长方形 -->
+    <div style="width:21px;height: 100%;position: absolute;right: 200px;top:0;background: #fff;z-index:1020;"></div>
+
+</div>

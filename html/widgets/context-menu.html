@@ -1,0 +1,9 @@
+<div class = "rightMenu">
+    <style>
+        #navMenu .nav{ position:absolute;border:1px solid #ccc;background: #fff;min-width: 60px;}
+        #navMenu .nav li{ white-space: nowrap;}
+    </style>
+    <ul id="navMenu">
+        <li ng-repeat = "i in menus" ng-click = "i.fn()"  ng-mouseover="showNav($index)">{{i.text}}</li>
+    </ul>
+</div>

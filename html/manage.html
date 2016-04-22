@@ -1,0 +1,468 @@
+<div>
+    <link href = "../css/editor.css" rel = "stylesheet">
+    <style>
+        body{
+            overflow: auto;
+        }
+        .pageContent{
+            padding-top: 56px;
+            width: 100%;
+        }
+        @media screen and (max-width: 767px) {
+            #pageContent {
+                margin-top: 130px;
+            }
+        }
+        @media (min-width:1440px){
+            .page-ul li {
+                width:20%;
+
+            }
+        }
+        @media (max-width:1440px){
+            .page-ul li {
+                width:25%;
+            }
+        }
+        .page-ul li{
+            /*border: 1px solid #ddd;*/
+            /*display:inline-block;
+            margin: 10px 8px;
+            width: 300px;*/
+            height: 184px;
+            /*box-shadow: 0 1px 3px 0 rgba(0,0,0,.4),0 1px 2px 0 rgba(0,0,0,.2),0 2px 1px -1px rgba(0,0,0,.2);*/
+            overflow: hidden;
+            position: relative;
+            float: left;
+            text-align: center;
+            /*width: 25%;*/
+            height: 100%;
+        }
+        .cardView .card-header{
+            width: 100%;
+            height: 30px;
+            text-align: center;
+            background: rgb(236, 240, 241);
+            color: #34495e;
+            /*color: #fff;*/
+            line-height: 30px;
+        }
+        .cardView .card-body{
+            padding-top: 5px;
+            height: 125px;
+            background: #fff;
+        }
+        .cardView .card-foot{
+            position: absolute;
+            right:20px;
+            bottom: 20px;
+            font-size: 12px;
+        }
+
+        .page-to-product {
+            /*position: relative;*/
+            display: block;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,.4),0 1px 2px 0 rgba(0,0,0,.2),0 2px 1px -1px rgba(0,0,0,.2);
+            margin: 10px 8px;
+
+        }
+
+        .page-ul {
+            margin: 3% 10%;
+        }
+        .page-ul li .page-to-product.add{
+            cursor: pointer;
+            height:155px;
+            line-height: 155px;
+            font-size: 48px;
+            font-weight: 600;
+        }
+     
+        .cur{
+            background: #d9edf7;
+        }
+        .top-header {
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            color: #000;
+            font-size: 25px;
+            text-align: center;
+        }
+        .alert{
+            padding: 4px;
+        }
+        .clearfix .control-label{ margin-top: 10px;}
+        .checkbox{ padding-left:6px;}
+        .form-group{ margin-bottom: 0;}
+        .form-control{ margin-top: 10px;}
+        .form-group span{ font-size: 15px;margin-top: 10px;display: inline-block;line-height: 2.3;}
+
+    </style>
+    <nav class = "navbar-inverse navbar-fixed-top navbar-collapse" role = "navigation">
+        <div class = "clearfix">
+            <ul class = "nav navbar-nav navbar-right">
+                <li>
+                    <a href = "#/index">
+                        <i class = "icon icon-reply"></i>
+                        返回首页
+                    </a>
+                </li>
+                <li class='dropdown'>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class = "icon icon-user"></i>{{usernameAdmin}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href = "login.html" class = "navbar-link">
+                                <i class = "icon icon-signout"></i>
+                                退出
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "#/manage?pwd" class = "navbar-link">
+                                <i class = "icon icon-signout"></i>
+                                修改密码
+                            </a>
+                        </li>
+                        <li ng-if="isAdmin">
+                            <a href = "#/manage" class = "navbar-link">
+                                <i class = "icon icon-signout"></i>
+                                权限管理
+                            </a>
+                        </li>
+                        <li ng-if="isAdmin">
+                            <a href = "#/manage?index=0" class = "navbar-link">
+                                <i class = "icon icon-signout"></i>
+                                子账号管理
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <account></account>
+
+    <!--部门角色-->
+    <div class="pageContent" ng-show="manage">
+        <h2 style="text-align: center" ng-show="!showPage">角色管理</h2>
+        <!--大概入口 ng-show="showPage"-->
+        <ul class="page-ul clearfix" ng-show="showPage">
+            <li ng-repeat="item in roleData" class="cardView">
+                <div class='page-to-product'>
+                    <div class="card-header f14 cp">
+                        <b contenteditable="true" style="display: block;height:30px;overflow: hidden;white-space: nowrap;" ng-blur="changeTitle($index,$event)" ng-keydown="changeTitle2($event,$keyCode,$index)">{{item.roleName}}</b>
+                    </div>
+                    <div class="card-body f14">
+                        <span>人数: <b>{{item.subUsers.length}}</b></span>
+                        <span>表数: <b>{{item.tbList.length}}</b></span>
+                    </div>
+                </div>
+                <a href="#/manage?page={{$index}}" class='card-foot btn-xs btn-success'>编辑</a>
+            </li>
+            <li ng-click="setnewpage()" class="cardView">
+                <a href='' class='page-to-product add'>+</a>
+            </li>
+        </ul>
+
+        <!--详细入口1 ng-show="!showPage"-->
+        <div class="container" ng-show="!showPage" style="margin-top:60px; ">
+            <!--nav导航-->
+             <ul class="list-group col-md-2" style="box-shadow: 0 0 4px #ccc;padding-right: 0;">
+                <li class="list-group-item  list-group-item-success cp"  ng-repeat="item in roleData" ng-click="selected($index,$event)" ng-class="{'cur':$index==id}">
+                     <span class="badge" title="人数" style="background-color: #1abc9c">{{item.subUsers.length}}</span>
+                    {{item.roleName}}
+                </li>
+            </ul>
+           <!--  <ul class="detail_title" style="width: 30%;">
+               <li ng-repeat="item in roleData" ng-click="selected($index,$event)" ng-class="{'cur':$index==id}">{{item.roleName}}</li>
+           </ul> -->
+            <!--表、人显示-->
+            <div class="col-md-8 col-md-offset-1" style="background-color: #d9edf7;padding: 10px;box-shadow: 0 0 4px #ccc;">
+                <div class="content_tit">当前拥有表： <button class="btn btn-primary btn-xs fr" ng-click="addtable()">关联表</button></div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label ng-repeat="item in showRoleTbList" style="margin-left: 10px;" ng-click="delRoleTbList($event,$index)">
+                            <input type="checkbox" style="margin-top:10px;" checked="checked">{{item.tableDesc}}
+                        </label>
+
+                    </div>
+                </div>
+                <div class="content_tit">当前子账号：<button class="btn btn-primary btn-xs fr" ng-click="add()">关联子账号</button><button class="btn btn-primary btn-xs fr" ng-click="manageAcount()" style="margin-right: 6px;">子账号管理</button></div>
+                <div class="form-group">
+                    <div class="checkbox">
+                         <label ng-repeat="item in rolesubUsers"  style="margin-left: 10px;">
+                            <input type="checkbox" style="margin-top:10px;" ng-click="delrolesubUsers($index)" checked id="{{item.userId}}">{{item.userName}}
+                        </label>
+
+                    </div>
+                </div>
+                <div><button class="btn btn-xs btn-default fr" ng-click="delManage()">删除角色</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!--子账号-->
+    <div class="pagepageContent" ng-show="sublistshow" style="padding-top:20px;">
+        <h2 style="text-align: center">子账号管理</h2>
+
+        <div class="container" style="padding: 0;margin-top:60px;">           
+            <div class="col-md-4">
+                <ul class="list-group col-md-6" style="box-shadow: 0 0 4px #ccc;padding-right: 0">
+                    <li class="list-group-item list-group-item-success cp"  ng-repeat="item in roleData" ng-click="selected($index,$event)" ng-class="{'cur':$index==id}">
+                        <!-- <span class="badge" title="人数" style="background-color: #1abc9c">{{item.subUsers.length}}</span> -->
+                        {{item.roleName}}
+                    </li>
+                </ul>
+                <ul class="list-group col-md-6" style="box-shadow: 0 0 4px #ccc;padding-right: 0" ng-init="UersShow=true" ng-show="UersShow">
+                    <li class="list-group-item list-group-item-success cp"  ng-repeat="item in UsersList" ng-click="selectUsers($index,$event)" ng-show="UersShow" ng-class="{'cur':$index==delIndex}" style="text-align: center;">                        
+                        {{item.userName}}
+                    </li>
+                </ul>
+            </div>           
+            <div ng-show="!editMenu" style="background-color: #d9edf7;padding: 10px;box-shadow: 0 0 4px #ccc;" class="clearfix col-md-7 col-md-offset-1">
+                <button class="fr btn btn-xs  btn-primary" style="margin:3px;" ng-click="addperson()">添加子账号</button>
+                <button class="btn btn-xs btn-default fr" style="margin:3px;" ng-click="del()">删除子账号</button>
+            </div>
+            <!--表、人显示-->
+            <div class="col-md-7 col-md-offset-1" style="background-color: #d9edf7;padding: 10px;box-shadow: 0 0 4px #ccc;" ng-init="indexEditShow=false" ng-show="indexEditShow" ng-show="!editMenu">
+                <div class="form-group clearfix" style="margin-top: 25px;">
+                    <label class="col-sm-2 col-sm-offset-2 control-label">账号名</label>
+                    <div class="col-sm-4">
+                        <span>{{userOne.userName}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <label class="control-label col-sm-2 col-sm-offset-2">所属角色</label>
+                    <div class="form-group  clearfix">
+                        <div class="checkbox col-sm-8">
+                            <label ng-repeat="item in roleNameList"  style="margin-left: 10px;padding-left: 0;">
+                                <span style="margin-top: 0px;">{{item.roleName}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label col-sm-offset-2">私有表</label>
+                    <div class="form-group  clearfix" >
+                        <div class="checkbox col-sm-8">
+                            <span ng-repeat="item in showRoleTbList"  style="margin-left: 10px;">
+                                {{item.tableDesc}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label col-sm-offset-2">部门</label>
+                    <div class="col-sm-4">
+                        <span>{{userOne.department}}</span>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label col-sm-offset-2">职位</label>
+                    <div class="col-sm-4">
+                        <span>{{userOne.position}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label col-sm-offset-2">姓名</label>
+                    <div class="col-sm-4">
+                        <span>{{userOne.contactSubName}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label col-sm-offset-2">是否可编辑</label>
+                    <div class="col-sm-4">
+                        <span>{{userOne.editable}}</span>
+                    </div>
+                </div>
+
+                <div>
+                <button class="btn btn-xs btn-primary fr" ng-click="editSub()">编辑修改</button>
+            </div>
+            </div>
+            <!--表、人修改-->
+            <div class="col-md-7 col-md-offset-1" style="background-color: #d9edf7;padding: 10px;box-shadow: 0 0 4px #ccc;"  ng-show="editMenu">
+                <div class="form-group clearfix" >
+                    <label class="col-sm-2 control-label">账号名</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="userOneCopy.userName">
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <label class="control-label col-sm-2">所属角色</label>
+                    <div class="form-group col-sm-offset-2 clearfix">
+                        <div class="checkbox col-sm-10">
+                            <label ng-repeat="item in EditroleNameList"  style="margin-left: 10px;">
+                                <input type="checkbox" style="margin-top:10px;"  checked ng-click="delRoleIds($index,$event)">{{item.roleName}}
+                            </label>
+                        </div>
+                        <button class="btn btn-primary btn-xs fr" style="margin-top:10px;"  ng-click="addroleId()">增加角色</button>
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label">私有表</label>
+                    <div class="form-group col-sm-offset-2 clearfix" >
+                        <div class="checkbox col-sm-10">
+                            <label ng-repeat="item in EditshowRoleTbList"  style="margin-left: 10px;" ng-click="delUserTbList($event,$index)">
+                                <input type="checkbox" style="margin-top:10px;" checked>{{item.tableDesc}}
+                            </label>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-xs fr" style="margin-top: -10px;" ng-click="addsubtable()">增加私有表</button>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label">部门</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control fl" ng-model="userOneCopy.department">
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label">职位</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control fl" ng-model="userOneCopy.position">
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label">姓名</label>
+                    <div class="col-sm-4">
+                        <input type="text"  class="form-control" value="" ng-model="userOneCopy.contactSubName">
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <label class="col-sm-2 control-label">是否可编辑</label>
+                    <div class="col-sm-4" style="margin-top: 10px;">
+                        <label class="toggle-radio" >是</label>
+                        <input type="radio" id="radio1" name="toggleOptions" value="true" ng-click="radioSelect($event)">
+
+                        <label class="toggle-radio" >否</label>
+                        <input type="radio" id="radio2" name="toggleOptions" value="false" ng-click="radioSelect($event)">
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-xs btn-primary fr" ng-click="affirm()">确认</button>
+                    <button class="btn btn-xs btn-primary fr" ng-click="cancel()" style="margin-right: 5px;">取消</button>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+<!--新增部门角色弹层-->
+    <div class = "container-fluid content" ng-init="setpage = false">
+        <div class = "setpage" ng-show = "setpage == true">
+            <div class = "modal-header">
+                <h3>
+                    角色管理
+                </h3>
+            </div>
+            <div class = "modal-body  clearfix">
+                <div class = "form-group clearfix">
+                    <label class = "col-sm-3 control-label pagelabel">
+                        添加角色
+                    </label>
+                    <div class = "col-sm-9">
+                        <input type = "text" class = "form-control" ng-model="addRoleName" placeholder = "请输入角色名称">
+                    </div>
+                </div>
+            </div>
+            <div class = "modal-footer">
+                <button class = "btn" ng-click = "setpage = false">
+                    关闭
+                </button>
+                <button class = "btn btn-primary" ng-click = "savepage()">
+                    保存
+                </button>
+            </div>
+        </div>
+    </div>
+<!--子账号所有列表-->
+    <div class = "container-fluid content" ng-init="showAccount=false">
+    <div class = "setpage" ng-show="showAccount">
+        <div class = "modal-header">
+            <h3>
+                添加子账号
+            </h3>
+        </div>
+        <div class = "modal-body  clearfix">
+            <div class = "form-group clearfix">
+                <label class = "col-sm-3 control-label pagelabel">所有子账号:</label>
+                <div class = "col-sm-9">
+                    <div class="checkbox">
+                        <label ng-repeat="item in allListUser"  style="margin-left: 10px;" ng-click="selectAdd($event,$index)">
+                            <input type="checkbox" style="margin-top:10px;" id="{{item.userId}}" value="{{item.userName}}">{{item.userName}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "modal-footer">
+            <button class = "btn" ng-click = "showAccount=false">
+                关闭
+            </button>
+            <button class = "btn btn-primary" ng-click = "saveAdd()">
+                保存
+            </button>
+        </div>
+    </div>
+	</div>
+
+<!--修改密码-->
+<div class = "col-md-4 col-sm-offset-4" style = "position:absolute;top:10%;" ng-show="pwdshow">
+    <div class = "top-header">
+        <b>修改密码</b>
+    </div>
+    <form class = "form-horizontal" name = "form">
+        <div class = "form-group" ng-class="{'has-error':form.oldPwd.$invalid&&form.oldPwd.$dirty}">
+            <label for = "oldPwd" class = "col-lg-2 control-label" style="margin-top: 10px;">原密码</label>
+            <div class = "col-lg-10">
+                <input type = "password" class = "form-control" name="oldPwd" ng-required="true" ng-minlength="6" id = "oldPwd" placeholder = "请输入原密码" ng-model = "oldPwd" ng-focus="true">
+                <div ng-show="form.oldPwd.$error.required && form.oldPwd.$dirty" class="alert alert-danger help-block col-md-6">
+                    原密码不能为空
+                </div>
+                <div ng-show="form.oldPwd.$error.minlength && form.oldPwd.$dirty" class="alert alert-danger help-block col-md-6">
+                    原密码长度至少6位
+                </div>
+            </div>
+        </div>
+        <div class = "form-group" style="margin-top: 10px;" ng-class="{'has-error':form.newPwd.$invalid&&form.newPwd.$dirty}">
+            <label for = "newPwd" class = "col-lg-2 control-label" style="margin-top: 10px;">新密码</label>
+            <div class = "col-lg-10">
+                <input type = "password" class = "form-control" name="newPwd" ng-required="true" ng-minlength="6" id = "newPwd" placeholder = "请输入新密码(至少6位)" ng-model = "newPwd">
+                <div ng-show="form.newPwd.$error.required && form.newPwd.$dirty" class="alert alert-danger help-block col-md-6">
+                    新密码不能为空
+                </div>
+                <div ng-show="form.newPwd.$error.minlength && form.newPwd.$dirty" class="alert alert-danger help-block col-md-6">
+                    新密码长度至少6位
+                </div>
+            </div>
+        </div>
+        <div class = "form-group" style="margin-top: 10px;" ng-class="{'has-error':form.newPwdConfirm.$invalid&&form.newPwdConfirm.$dirty||(newPwd!=newPwdConfirm&&form.newPwdConfirm.$dirty)}">
+            <label for = "newPwd" class = "col-lg-2 control-label" style="margin-top: 10px;">确认密码</label>
+            <div class = "col-lg-10">
+                <input type = "password" class = "form-control" name="newPwdConfirm" ng-required="true" ng-minlength="6" id = "newPwdConfirm" placeholder = "请再次输入密码(至少6位)" ng-model = "newPwdConfirm">
+                <div ng-show="newPwd!=newPwdConfirm && form.newPwd.$dirty && form.newPwdConfirm.$dirty" class="alert alert-danger help-block col-md-6">
+                    密码不一致
+                </div>
+
+            </div>
+        </div>
+        <div class = "form-group" style="margin-top: 20px;">
+            <div class = "col-lg-offset-2 col-lg-10">
+                <button type = "submit" class = "btn btn-primary btn-block" ng-click = "changePwd(form)" ng-disabled="form.$invalid||(newPwd!=newPwdConfirm && form.newPwdConfirm.$dirty)||newPwd==''||oldPwd==''">确认修改</button>
+                <button type = "reset" class = "btn btn-primary btn-block" ng-click="reset(form)">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<confirm></confirm>
+<my-dialog></my-dialog>
+<script src = "../libs/js/md5.js"></script>
+</div>

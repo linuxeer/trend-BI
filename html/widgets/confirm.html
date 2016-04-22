@@ -1,0 +1,11 @@
+<div class = "setpage" ng-show="shown" ng-init='shown = false'>
+    <div class = "modal-header">
+        <h3>{{title}}</h3>
+    </div>
+    <div class = "modal-body  clearfix">
+        {{content}}
+    </div>
+    <div class = "modal-footer">
+        <button class = "btn {{btn.style}}" ng-repeat='btn in btns' ng-click='btn.fn();colse()'>{{btn.text}}</button>
+    </div>
+</div>

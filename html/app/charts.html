@@ -1,0 +1,47 @@
+<div>
+    <header class = "nav">
+        <b class = "ml15 fl" ng-click = "toogle('charts-pages-container')">{{pageName}}
+            <i class = "fa fa-chevron-circle-down fa-charts-pages-container"></i>
+        </b>
+        <b class = "fr mr10">
+            <span style = "opacity: 0;">*</span>
+            <a href = "#/home" style = "color:#fff;">
+            <i class = "fa fa-home" style = "font-size: 16px;"></i>
+            </a>
+        </b>
+        <b class = "fr" ng-click = "toogle('share-container')">
+            <span style = "opacity: 0;">*</span>
+            <i class = "fa fa-share-alt" style = "font-size: 16px;"></i>
+            </a>
+        </b>
+        <b class = "fr" ng-click = "refresh()">
+            <span style = "opacity: 0;">*</span>
+            <a href = "javascript:void(0)" style = "color:#fff;">
+            <i class = "fa fa-refresh" style = "font-size: 16px;"></i>
+            </a>
+        </b>
+        <b class = "mr5 fr" ng-click = "toogle('charts-query-container')">筛选
+            <i class = "fa fa-chevron-circle-down fa-charts-query-container"></i>
+        </b>
+    </header>
+    <div class = "charts-container mt40 pb20">
+        <chart ng-repeat = "chart in items.chartlist" data-moduleId = "{{chart.moduleId}}"></chart>
+        <sheet ng-repeat = "chart in items.sheetlist" data-moduleId = "{{chart.moduleId}}"></sheet>
+    </div>
+    <div class = "top charts-pages-container">
+        <div class = "ml10 mt50">
+            <page-list></page-list>
+        </div>
+    </div>
+    <div class = "top charts-query-container" stop-left-right-slide = "">
+        <div class = "mt50">
+            <radio-filter ng-repeat = "radio in items.radiolist" data-conditionId = "{{radio.conditionId}}"></radio-filter>
+            <checkbox-filter ng-repeat = "checkbox in items.checkboxlist" data-conditionId = "{{checkbox.conditionId}}"></checkbox-filter>
+            <value-filter ng-repeat = "checkbox in items.betweenlist" data-conditionId = "{{checkbox.conditionId}}"></value-filter>
+            <date-filter data-conditionId = "77777"></date-filter>
+        </div>
+    </div>
+    <div class = "top share-container">
+        <share-list></share-list>
+    </div>
+</div>

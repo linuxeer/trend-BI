@@ -1,0 +1,30 @@
+
+
+<div class='setpage setcolumn-confirm' ng-show="shareshow" ng-init='shareshow = false'>
+    <div class = 'close close-setcolumn' ng-click = 'shareshow = false;'>
+        <i class = "icon-remove-circle"></i>
+    </div>
+    <div class = "modal-header">
+        <h3>分享</h3>
+    </div>
+    <div class="form-horizontal setpagestyle">
+        <div class='sharecontent'>
+            <div ng-repeat='group in grouplist'>
+                <div><label><input type='checkbox' ng-click='selectGroupOrNot(group.shared,group.roleId)' ng-model='group.shared' />{{group.roleName}}</label></div>
+                <ul class='shareul clearfix'>
+                    <li ng-repeat='personal in group.subUsers'><label><input type='checkbox' ng-click='selectPersonOrNot(personal.shared,group.roleId)' ng-model='personal.shared' />{{personal.userName}}</label></li>
+                </ul>
+            </div>
+            <div>
+                <div><label>未分组成员</label></div>
+                <ul class='shareul clearfix'>
+                    <li ng-repeat='user in userlist'><label><input type='checkbox' ng-model='user.shared' />{{user.userName}}</label></li>
+                </ul>
+            </div>
+        </div>
+	    
+        <div class="modal-footer setcolumnbtns">
+            <button class="btn btn-default" ng-click="shareshow = false">取消</button><button class="btn btn-primary" ng-click="shareadd()">确定</button>
+        </div>
+    </div>
+</div>

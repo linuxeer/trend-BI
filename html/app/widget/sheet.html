@@ -1,0 +1,59 @@
+<div class = "table-box mt40" style = "font-size: 12;">
+    <div class = "table-box-title mb5 tc">
+        {{config.ctitle}}
+    </div>
+    <div class = "table-container h pr bb" style = "z-index: 10;overflow: scroll;width: 95%;margin:0 auto;">
+        <!--原始数据-->
+        <div class = "w h pa l0 t0 table-for-data" style = "z-index: 0;">
+            <table class = "table w table-striped" style = "background: #fff;">
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat = "line in tableData">
+                        <td ng-repeat = "data in line track by $index">
+                            {{data}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--行表头-->
+        <div class = "w pa l0 t0 table-for-line-header none" style = "z-index: 1;">
+            <table class = "table w table-striped" style = "background: #fff;">
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat = "line in tableData" ng-if = "$index < lineHeaderSize">
+                        <td ng-repeat = "data in line track by $index">
+                            {{data}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--列表头-->
+        <div class = "pa l0 t0 table-for-list-header none" style = "z-index: 2;">
+            <table class = "table w table-striped" style = "background: #fff;">
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat = "line in tableData">
+                        <td ng-repeat = "data in line track by $index" ng-if = "$index < listHeaderSize">
+                            {{data}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--左上角固定表头-->
+        <div class = "pa l0 t0 table-for-corn-header none" style = "z-index: 3;">
+            <table class = "table w table-striped" style = "background: #fff;">
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat = "line in tableData" ng-if = "$index < lineHeaderSize">
+                        <td ng-repeat = "data in line track by $index" ng-if = "$index < listHeaderSize">
+                            {{data}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

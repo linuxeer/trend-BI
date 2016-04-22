@@ -1,0 +1,89 @@
+<div class = "clearfix" >
+    <div id='product'></div>
+    <div class = "clearfix">
+        <nav class = "navbar-inverse navbar-fixed-top navbar-collapse top" role = "navigation">
+            <div class = "clearfix">
+                <ul class = "navbar-nav nav">
+                    <!-- <themelist></themelist> -->
+                    <li class="" ng-if="editable">
+	                    <a href="#/editor?pageid={{pageid}}">
+	                        <i class="icon icon-file"></i>
+	                        编辑
+	                    </a>
+	                </li>
+                </ul>
+                <div class='product-pagename'>{{pageName}}</div>
+                <ul class = "nav navbar-nav navbar-right">
+                    <li>
+                        <a href = "javascript:void(0)" ng-click='sharepage()'>
+                        <i class = "icon icon-share"></i>
+                        分享
+                        </a>
+                    </li>
+                    <li>
+                        <!-- <a href = "#/editor?pageid={{pageId}}">
+                        <i class = "icon icon-reply"></i>
+                        返回编辑页面
+                        </a> -->
+                        <a href = "#/index">
+                        <i class = "icon icon-reply"></i>
+                        返回
+                        </a>
+                    </li>
+                    <li class='dropdown'>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class = "icon icon-user"></i>{{username}} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href = "login.html" class = "navbar-link">
+                                    <i class = "icon icon-signout"></i>
+                                    退出
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <!-- <li>
+                        <a href = "javascript:void(0)">
+                        <i class = "icon icon-user"></i>
+                        begin
+                        </a>
+                    </li>
+                    <li>
+                        <a href = "login.html" class = "navbar-link">
+                        <i class = "icon icon-signout"></i>
+                        退出
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div>
+        <div class = "pr" style = "width:95%;margin:70px auto;">
+        <share></share>
+            <div id = "charts-container" class = "pa" style = "min-height: 400px;width: 100%">
+                    <chart data-left = "{{chart.left}}" data-top = "{{chart.top}}" data-width = "{{chart.width}}" data-height = "{{chart.height}}" data-moduleId = "{{chart.moduleId || 0}}" data-type = "{{chart.chartType}}" data-identifier = "{{chart.identifier}}" ng-repeat = "chart in chartlist track by $index" ng-if='chart.del != true'></chart>
+
+
+                    <sheet data-left = "{{table.left}}" data-top = "{{table.top}}" data-width = "{{table.width}}" data-height = "{{table.height}}" data-moduleId = "{{table.moduleId}}" data-type = "{{table.chartType}}" data-identifier = "{{table.identifier}}" ng-repeat = "table in sheetlist track by $index" ng-if='table.del != true'></sheet>
+
+                    <radio-filter data-left = "{{radio.left}}" data-top = "{{radio.top}}" data-width = "{{radio.width}}" data-height = "{{radio.height}}" data-type = "{{radio.chartType}}" data-conditionId = "{{radio.conditionId}}" data-identifier = "{{radio.identifier}}" ng-repeat = 'radio in radiolist track by $index' ng-if='radio.del != true'></radio-filter>
+
+                    <select-filter data-left = "{{select.left}}" data-top = "{{select.top}}" data-width = "{{select.width}}" data-height = "{{6}}" data-type = "{{select.chartType}}" data-conditionId = "{{select.conditionId}}" data-identifier = "{{select.identifier}}" ng-repeat = 'select in selectlist track by $index' ng-if='select.del != true'></select-filter>
+
+                    <check-box-filter data-left = "{{checkbox.left}}" data-top = "{{checkbox.top}}" data-width = "{{checkbox.width}}" data-height = "{{checkbox.height}}" data-type = "{{checkbox.chartType}}" data-conditionId = "{{checkbox.conditionId}}" data-identifier = "{{checkbox.identifier}}" ng-repeat = 'checkbox in checkboxlist track by $index' ng-if='checkbox.del != true'></check-box-filter>
+
+                    <value-filter data-left = "{{between.left}}" data-top = "{{between.top}}" data-width = "{{between.width}}" data-height = "{{5}}" data-type = "{{between.chartType}}" data-conditionId = "{{between.conditionId}}" data-identifier = "{{between.identifier}}" ng-repeat = 'between in betweenlist track by $index' ng-if='between.del != true'></value-filter>
+
+                    <date-filter data-left = "{{date.left}}" data-top = "{{date.top}}" data-width = "{{date.width}}" data-height = "{{15}}" data-type = "{{date.chartType}}" data-conditionId = "{{date.conditionId}}" data-identifier = "{{date.identifier}}" ng-repeat = 'date in datelist track by $index' ng-if='date.del != true'></date-filter>
+
+                    <note data-left = "{{note.left}}" data-top = "{{note.top}}" data-width = "{{note.width}}" data-height = "{{3}}" data-type = "{{note.chartType}}" data-conditionId = "{{note.conditionId}}" data-identifier = "{{note.identifier}}" ng-repeat = 'note in notelist track by $index' ng-if='note.del != true' data-text='{{note.text}}'></note>
+
+                    <syncdata data-left = "{{syncdata.left}}" data-top = "{{syncdata.top}}" data-width = "{{syncdata.width}}" data-height = "{{syncdata.height}}" data-type = "{{syncdata.chartType}}" data-moduleId = "{{syncdata.moduleId || 0}}" data-identifier = "{{syncdata.identifier}}" ng-repeat = 'syncdata in syncdatalist track by $index' ng-if='syncdata.del != true'></syncdata>
+            </div>
+        </div>
+    </div>
+    <div class = "modal-backdrop fade in" ng-show = "shareshow == true">
+
+    </div>
+</div>

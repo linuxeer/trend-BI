@@ -1,0 +1,12 @@
+<div filter keydown-listen ng-delete-fn = "delete_fn($event)" class = "pa filter-box check-box-filter-box" style = "font-size: 13px;z-index: 1;">
+    <div class = "filter-box-module" ng-show = "filter.conditionId" style = "background: rgb(236, 240, 241);font-weight: bold">
+        <span class = "ml5">{{filter.filtername}}多选筛选</span>
+    </div>
+    <div ng-show = "filter.conditionId" class = "filter-box-module clearfix item-box tc" style = "z-index: 3;">
+        <label ng-repeat = "item in items" class = "fl ml10 tl" ng-click = "select(item)">
+            <input type = "checkbox" ng-model = "item.selected"/>
+            <span>{{item.str}}</span>
+        </label>
+    </div>
+    <div ng-show = "!isPreviewing" ng-right-click = "rightclick()" move-able resize-able select-able class = "w h l0 t0 pa interactive" style = "left:0px;top:0px;z-index: 2"></div>
+</div>

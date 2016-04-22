@@ -1,0 +1,15 @@
+<div filter keydown-listen ng-delete-fn = "delete_fn($event)" class = "pa filter-box value-filter-box" style = "font-size: 13px;z-index: 1;">
+    <div class = "filter-box-module" style = "background: rgb(236, 240, 241);font-weight: bold;">
+        <span class = "ml5">{{filter.filtername}}阈值选择</span>
+    </div>
+    <div ng-show = "filter.conditionId" class = "filter-box-module value-filter-box-slide-bar pr mt10">
+        <a class = "value-filter-box-slide-ball value-min"></a>
+        <a class = "value-filter-box-slide-ball value-max"></a>
+    </div>
+    <div ng-show = "filter.conditionId" class = "filter-box-module tc f14">
+        <span>{{min}}</span>
+        -
+        <span>{{max}}</span>
+    </div>
+    <div ng-show = "!isPreviewing" ng-right-click = "rightclick()" move-able resize-able select-able class = "w h l0 t0 pa interactive" style = "left:0px;top:0px;z-index: 2"></div>
+</div>

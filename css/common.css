@@ -1,0 +1,469 @@
+#showImg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .4);
+    z-index: 9999;
+}
+
+#showImg .showBox {
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -20%;
+    margin-left: -30%;
+    background: #fff;
+    box-shadow: 3px 3px 16px rgba(0, 0, 0, .8);
+    z-index: 889;
+
+}
+
+#showImg #close {
+    width: 30px;
+    height: 30px;
+    background: url('../images/fancybox.png') no-repeat -40px 0px;
+    position: absolute;
+    right: -15px;
+    top: -16px;
+    color: red;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 890;
+}
+
+#showImg .img {
+    width: 100%;
+    height: 100%;
+}
+
+.rightMenu {
+    border: 1px solid #999;
+    background: #fff;
+    width: 150px;
+    display: block;
+    position: fixed;
+    display: none;
+    font-size: 15px;
+    z-index: 100000;
+    /*padding: 5px 10px;*/
+}
+
+.rightMenu ul li {
+    /*margin-bottom: 5px;*/
+    padding: 0px 5px;
+    cursor: default;
+}
+
+.rightMenu ul li:hover {
+    background: #ddd;
+}
+
+.date-filter-box {
+    background: url('../images/date.png') center center no-repeat;
+}
+
+.value-filter-box {
+    background-image: url('../images/between.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.select-filter-box {
+    background-image: url('../images/select.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.check-box-filter-box {
+    background-image: url('../images/checkbox.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.radio-filter-box {
+    background-image: url('../images/radio.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.filter-box-module table tr td.selectable:hover, .filter-box-module table tr td.selected {
+    background: rgb(236, 240, 241);
+}
+
+.filter-box-module table tr td.unselectable {
+    color: #ddd;
+}
+
+.dark {
+    color: #aaa;
+}
+
+.value-filter-box-slide-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: 30px;
+    background: rgb(236, 240, 241);
+}
+
+.value-filter-box-slide-ball {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -5px;
+    border-radius: 100%;
+    background: #ccc;
+}
+
+.value-filter-box-slide-ball.value-min {
+    left: 0px;
+}
+
+.value-filter-box-slide-ball.value-max {
+    right: 20px;
+}
+
+.value-filter-box-slide-ball:hover {
+    cursor: move;
+}
+
+/***********************************css for editor and system**************************************/
+.chart-box {
+    border: 1px solid #444;
+}
+
+.table-box {
+    border: 1px solid #444;
+    cursor: pointer;
+    /*overflow: hidden;*/
+}
+
+.table-box-title {
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 14px;
+    background: "";
+}
+
+.table-box td {
+    padding: 3px 4px;
+    border-right: 1px solid rgb(221, 221, 221);
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.table-box tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.table-box td:hover, .table-box td.selected {
+    background: #ccc;
+    color: #fff;
+}
+
+.chart-box img {
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.chart-box-menu {
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.chart-box-menu ul li:hover {
+    background: #ddd;
+}
+
+.chart-box .glyphicon-list, .table-box .glyphicon-list {
+    visibility: hidden;
+}
+
+.chart-box.working:hover .glyphicon-list, .table-box.working:hover .glyphicon-list {
+    visibility: visible;
+}
+
+.chart-box.StandardPieChart, .highchart-box.StandardPieChart {
+    background: url('../images/pie.png') center center no-repeat;
+}
+
+.chart-box.StandardBarChart, .highchart-box.StandardBarChart {
+    background: url('../images/bar.png') center center no-repeat;
+}
+
+.chart-box.StandardLineChart, .highchart-box.StandardLineChart {
+    background: url('../images/line.png') center center no-repeat;
+}
+
+.chart-box.StandardRadarChart, .highchart-box.StandardRadarChart {
+    background: url('../images/radar.png') center center no-repeat;
+}
+
+.chart-box.SpeedometerInstrumentChart, .highchart-box.SpeedometerInstrumentChart {
+    background: url('../images/gauge.png') center center no-repeat;
+}
+
+.chart-box.StandardScatterchart, .highchart-box.StandardScatterchart {
+    background: url('../images/scatter.png') center center no-repeat;
+}
+
+.syncdata-condition.syncdata {
+    background: url('../images/syncdata.png') center center no-repeat;
+}
+
+.table-box.summarytab {
+    background: url('../images/summarytab.png') center center no-repeat;
+}
+
+.table-box.crosstab {
+    background: url('../images/crosstab.png') center center no-repeat;
+}
+
+.table-box.detailtab {
+    background: url('../images/detailtab.png') center center no-repeat;
+}
+
+.filter-box {
+    border: 1px solid rgb(236, 240, 241);
+    position: absolute;
+    cursor: pointer;
+}
+
+.drag-content {
+    width: 100%;
+    min-height: 400px;
+}
+
+.point {
+    position: absolute;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #34495e;
+}
+
+.point_tr {
+    top: 0px;
+    right: 0px;
+    cursor: ne-resize;
+}
+
+.point_tl {
+    top: 0px;
+    left: 0px;
+    cursor: nw-resize;
+}
+
+.point_br {
+    bottom: 0px;
+    right: 0px;
+    cursor: se-resize;
+}
+
+.point_bl {
+    bottom: 0px;
+    left: 0px;
+    cursor: sw-resize;
+}
+
+.point_tm {
+    left: 50%;
+    top: 0px;
+    margin-left: -4px;
+    cursor: n-resize;
+}
+
+.point_bm {
+    left: 50%;
+    bottom: 0px;
+    margin-left: -4px;
+    cursor: s-resize;
+}
+
+.point_lm {
+    top: 50%;
+    left: 0px;
+    margin-top: -4px;
+    cursor: w-resize;
+}
+
+.point_rm {
+    top: 50%;
+    right: 0px;
+    margin-top: -4px;
+    cursor: e-resize;
+}
+
+.chart-box.loading {
+    background: url('../images/loading.gif') center center no-repeat;
+}
+
+.chart-box .title-edit, .table-box .title-edit {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    background: #34495e;
+    z-index: 200;
+    text-align: center;
+}
+
+.chart-box .title-edit input, .table-box .title-edit input {
+    width: 80%;
+    max-width: 500px;
+}
+
+.data-table-box-title {
+    padding: 8px 0px;
+    text-align: left;
+}
+
+.data-table-box {
+    overflow: hidden;
+}
+
+.highcharts-series rect, .highcharts-markers path, .highcharts-series path {
+    cursor: pointer;
+}
+
+#product {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+}
+
+.product-pagename {
+    color: #fff;
+    position: absolute;
+    left: 20%;
+    line-height: 53px;
+    height: 53px;
+    overflow: hidden;
+    width: 60%;
+    text-align: center;
+}
+
+.pageshare {
+    float: right;
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.chooseinfo {
+    font-size: 12px;
+    padding: 3px;
+    margin: 10px;
+}
+
+/**/
+.setpage {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    z-index: 1050;
+    width: 560px;
+    margin-left: -280px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+    outline: none;
+}
+
+.setpage .modal-header h3 {
+    font-size: 24px;
+    padding: 0;
+    margin: 0;
+}
+
+.setpagestyle {
+    padding: 15px;
+}
+
+.pagelabel {
+    text-align: right;
+    font-size: 16px;
+
+}
+
+.setpage input {
+    border: 0 none;
+
+}
+
+.setpage .pagename {
+    height: 33px;
+}
+
+.setcolumn-confirm {
+    width: 830px;
+    margin-left: -415px;
+}
+
+.chooseinfo h4 {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.sharecontent input[type='checkbox'] {
+    margin: 0 5px 0 0;
+}
+
+.sharecontent {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.shareul li {
+    float: left;
+    width: 25%;
+    padding-right: 10px;
+
+}
+
+.shareul li label {
+    font-size: 12px;
+}
+
+.close-setcolumn {
+    margin: 5px 5px 0 0;
+}
+
+#full-screen-container {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 80%;
+    height: 80%;
+    z-index: 99999;
+    background: #fff;
+    margin-top: -20%;
+    margin-left: -40%;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.table tbody td {
+    min-width: 80px;
+    text-align: center;
+    vertical-align: middle;
+}

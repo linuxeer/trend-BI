@@ -1,0 +1,13 @@
+<li class='dropdown'>
+	<a data-toggle="dropdown" class="dropdown-toggle" href="#">{{choosepagename}} <b class="caret"></b></a>
+	<ul class="dropdown-menu">
+		<li ng-repeat="page in pagelist">
+		  <!-- <a href="#/editor?pageid={{page.pageid}}" ng-click="choosepage(page.pageid)"> -->
+		  <a href="javascript:void(0)" ng-click="choosepage(page.pageid)">
+		     <div class="chartname" pageid="{{page.pageid}}">{{page.pagename}}</div>
+		  </a>
+		</li>
+		
+	</ul>
+</li>
+

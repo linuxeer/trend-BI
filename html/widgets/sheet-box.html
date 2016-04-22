@@ -1,0 +1,80 @@
+<div ng-mouseleave = "menuShown = false;subMenuShown = false;" keydown-listen ng-delete-fn = "delete_fn($event)" class = "table-box pa" style = "font-size: 13px;z-index: 1;">
+    <div class = "table-box-title">
+        {{sheet.ctitle}}
+    </div>
+    <div class = "table-container w pr" style = "z-index: 10;overflow: scroll;">
+        <!--原始数据-->
+        <div class = "w h pa l0 t0 table-for-data" style = "z-index: 0;">
+            <table class = "table w" style = "background: #fff;">
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat = "line in tableData">
+                        <td ng-repeat = "data in line track by $index" ng-click = "link($event,$parent.$index,$index)">
+                            {{data}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--行表头-->
+        <div class = "w pa l0 t0 table-for-line-header none" style = "z-index: 1;">
+            <table class = "table w" style = "background: #fff;">
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat = "line in tableData" ng-if = "$index < lineHeaderSize">
+                        <td ng-repeat = "data in line track by $index">
+                            {{data}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--列表头-->
+        <div class = "pa l0 t0 table-for-list-header none" style = "z-index: 2;">
+            <table class = "table w" style = "background: #fff;">
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat = "line in tableData">
+                        <td ng-repeat = "data in line track by $index" ng-if = "$index < listHeaderSize">
+                            {{data}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--左上角固定表头-->
+        <div class = "pa l0 t0 table-for-corn-header none" style = "z-index: 100;">
+            <table class = "table w" style = "background: #fff;">
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat = "line in tableData" ng-if = "$index < lineHeaderSize">
+                        <td ng-repeat = "data in line track by $index" ng-if = "$index < listHeaderSize">
+                            {{data}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div ng-show = "!isPreviewing" ng-right-click = "rightclick()" move-able resize-able select-able class = "w h pa interactive" style = "left:0px;top:0px;z-index: 100"></div>
+    <div class = "title-edit" ng-show = "title_edit_show">
+        <input type = "text" class = "mr10" ng-model = "sheet.ctitle"/>
+        <b style = "color:#fff;font-size: 14px;cursor: pointer" ng-click = "title_confirm()">确定</b>
+        <b style = "color:#ddd;font-size: 14px;cursor: pointer" ng-click = "title_cancel()">取消</b>
+    </div>
+    <span ng-show = "hasMenu" class = "glyphicon glyphicon-list cp" style = "position: absolute;right: 0px;top:0px;" ng-click = "showMenu()"></span>
+    <div class = "chart-box-menu f14" ng-show = "menuShown" style = "position: absolute;right: 22px;top:0px;width:100px;z-index: 1000;">
+        <ul>
+            <li ng-repeat = "i in operMenus" ng-click = "i.fn()" ng-mouseover = "showSubMenu($index)">
+                <a class = "ml10 cp">{{i.text}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class = "chart-box-menu f14" ng-show = "subMenuShown" style = "position: absolute;right: 125px;top:{{top}};width:100px;z-index: 1000;">
+        <ul>
+            <li ng-repeat = "i in submenus" ng-click = "i.fn()">
+                <a class = "ml10 cp">{{i.text}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

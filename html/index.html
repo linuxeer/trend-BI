@@ -1,0 +1,110 @@
+<div>
+    <link href = "../css/editor.css" rel = "stylesheet">
+    <link href = "../css/index.css" rel = "stylesheet">
+    <nav class = "navbar-inverse navbar-fixed-top navbar-collapse" role = "navigation">
+        <div class = "clearfix">
+            <ul class = "navbar-nav nav w80">
+                <li ng-show = "seteditable == 'true'">
+                    <a href = "javascript:void(0)" ng-click = "setnewpage()">
+                    <i class = "icon icon-file"></i>
+                    新建
+                    </a>
+                </li>
+            </ul>
+            <ul class = "nav navbar-nav navbar-right">
+                <li class = 'dropdown'>
+                    <a data-toggle = "dropdown" class = "dropdown-toggle" href = "#">
+                    <i class = "icon icon-user"></i>
+                    {{username}}
+                    <b class = "caret"></b>
+                    </a>
+                    <ul class = "dropdown-menu">
+                        <li>
+                            <a href = "login.html" class = "navbar-link">
+                            <i class = "icon icon-signout"></i>
+                            退出
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "#/manage?pwd" class = "navbar-link">
+                            <i class = "icon icon-signout"></i>
+                            修改密码
+                            </a>
+                        </li>
+                        <li ng-if = "isAdmin">
+                            <a href = "#/manage" class = "navbar-link">
+                            <i class = "icon icon-signout"></i>
+                            权限管理
+                            </a>
+                        </li>
+                        <li ng-if = "isAdmin">
+                            <a href = "#/manage?index=0" class = "navbar-link">
+                            <i class = "icon icon-signout"></i>
+                            子账号管理
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--分页浏览-->
+    <div id = "pageContent">
+        <ul class = "page-ul clearfix">
+            <li ng-repeat = "item in pageList" title = "{{item.oriPageName}}" class = "cardView" ng-right-click = "rightclick(item.pageId,item.tbId,item.tableType)">
+                <a href = 'javascript:void(0)' class = 'page-to-product' ng-click = "showproduct(item.pageId,item.editable)">
+                <div class = "card-header f14 cp">{{item.pageName}}</div>
+                <div class = "card-body cp" style = "background:url({{item.picturePath}}) no-repeat 0 -2px;background-size:100% auto;"></div>
+                <!-- <div class="card-foot"><button class="btn-xs btn-success" ng-click="edit(item.pageId)">编辑</button></div> -->
+                </a>
+                <a href = "#/editor?pageid={{item.pageId}}" class = 'card-foot btn-xs btn-success' ng-if = "item.editable">编辑</a>
+                <div class = "iconTitle cp text-success">
+                    <span class = "sharesMess">{{item.sharerName}}</span>
+                    <span class = "glyphicon glyphicon-send" ng-show = "item.sharedRoleIds.length||item.sharedUserIds.length"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class = "container-fluid content">
+        <confirm></confirm>
+        <div class = "setpage" ng-show = "setpage == true">
+            <div class = "modal-header">
+                <h3>
+                    页面设置
+                </h3>
+            </div>
+            <div class = "modal-body  clearfix">
+                <div class = "form-group clearfix">
+                    <label class = "col-sm-3 control-label pagelabel">
+                        页面名称
+                    </label>
+                    <div class = "col-sm-9 bdblue">
+                        <input type = "text" class = "form-control pagename" placeholder = "请输入页面名称">
+                    </div>
+                </div>
+                <div class = "form-group clearfix">
+                    <label class = "col-sm-3 control-label pagelabel">
+                        表格选择
+                    </label>
+                    <div class = "col-sm-9">
+                        <label class = "radio-inline radioml" ng-repeat = "tablename in model.tablist">
+                            <input type = "radio" class = "tabradio" name = "tbname" value = "{{tablename.tabid}}" ng-click = "radiochk(tablename.tabid,tablename.tabletype)">
+                            {{tablename.tableDesc}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class = "modal-footer">
+                <button class = "btn" ng-click = "setpage = false">
+                    关闭
+                </button>
+                <button class = "btn btn-primary" ng-click = "savepage()">
+                    保存设置
+                </button>
+            </div>
+        </div>
+    </div>
+    <share></share>
+    <div class = "modal-backdrop fade in" ng-show = "shareshow == true"></div>
+</div>

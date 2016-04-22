@@ -1,0 +1,11 @@
+<div filter keydown-listen ng-delete-fn = "delete_fn($event)" class = "pa filter-box select-filter-box" style = "font-size: 12px;z-index: 1;">
+    <div class = "filter-box-module" ng-show = "filter.conditionId" style = "background: rgb(236, 240, 241);font-weight: bold;">
+        <span class = "ml5">{{filter.filtername}}下拉选择</span>
+    </div>
+    <div ng-show = "filter.conditionId" class = "tc filter-box-module" style = "z-index: 3;">
+        <select class = "w120 mt10" style = "height: 30px;" ng-model = "op.selected">
+            <option value = "{{item}}" ng-repeat = "item in items">{{item}}</option>
+        </select>
+    </div>
+    <div ng-show = "!isPreviewing" ng-right-click = "rightclick()" move-able resize-able select-able class = "w h l0 t0 pa interactive" style = "left:0px;top:0px;z-index: 2"></div>
+</div>

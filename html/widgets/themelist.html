@@ -1,0 +1,11 @@
+<li class='dropdown'>
+	<a data-toggle="dropdown" class="dropdown-toggle" href="#">{{choosethemename}} <b class="caret"></b></a>
+	<ul class="dropdown-menu">
+		<li ng-repeat="theme in themelist" ng-click="choosetheme(theme.themename,theme.themetext)" theme="theme.themename">
+		  <a href="javascript:void(0)">
+		     <div class="chartname">{{theme.themetext}}</div>
+		  </a>
+		</li>
+		
+	</ul>
+</li>

@@ -1,0 +1,11 @@
+<div id = "full-screen-container" ng-show = "shown">
+    <i class = "icon-remove-circle fr cp" style = "font-size:20px;" ng-click = "close()" title = "关闭全屏模式"></i>
+    <div class = "full-screen-chart-box clearfix" ng-show = "chart_box_shown">
+
+    </div>
+    <div class = "full-screen-sheet-box clearfix" ng-show = "sheet_box_shown">
+        <div class = "ml20 mb20 w h">
+            <sheet data-fullscreen = "true" data-moduleId = "{{table.moduleId}}" data-type = "{{table.chartType}}" data-identifier = "{{table.identifier}}" ng-repeat = "table in sheetlist track by $index"></sheet>
+        </div>
+    </div>
+</div>

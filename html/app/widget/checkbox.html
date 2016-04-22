@@ -1,0 +1,14 @@
+<div class = "data-screen">
+    <div class = "" style = "padding-top:5px;padding-bottom: 5px;color:#fff;padding-left: 10px;">
+        <b>{{filtername}}筛选(多选)</b>
+    </div>
+    <div class = "clearfix mt10">
+        <ul class = "checkbox">
+            <li class = "fl ml10 mb10" ng-repeat = "item in items" my-touchstart = "select($index)">
+                <img src = "{{item.src}}" class = "fl" style = "width:15px;" alt = "">
+                <!--<i class = "fa fa-square-o fl"></i>-->
+                <b class = "fl ml5" style = "margin-left: 3px;">{{item.text}}</b>
+            </li>
+        </ul>
+    </div>
+</div>

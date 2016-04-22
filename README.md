@@ -1,2 +1,1 @@
-# trend-BI
-used to display data
+#trend-BI

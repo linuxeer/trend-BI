@@ -1,0 +1,30 @@
+
+
+<div class='setpage setcolumn-confirm' ng-show='showpagestyle'>
+    <div class = 'close close-setcolumn' ng-click = 'showpagestyle = false;'>
+        <i class = "icon-remove-circle"></i>
+    </div>
+    <div class = "modal-header">
+        <h3>页面样式设置</h3>
+    </div>
+    <ul class="nav nav-tabs setcolumntabs">
+        <li class='active'><a href="javascript:void(0)">页面颜色设置</a></li>
+       
+    </ul>
+    <div class="form-horizontal setpagestyle">
+        
+        <div class="clearfix">
+            <label class="">页面背景颜色:</label>
+            <input type="color" value='#ffffff' id='pagebgcolor' />
+
+        </div>
+        <div class="clearfix">
+            <label class="">页面字体颜色:</label>
+            <input type="color" value='#333333' id='pagefontcolor' />
+
+        </div>
+        <div class="modal-footer setcolumnbtns">
+            <button class="btn btn-default" ng-click="pagecolorcancel()">取消</button><button class="btn btn-primary" ng-click="pagecoloradd()">确定</button>
+        </div>
+    </div>
+</div>

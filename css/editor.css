@@ -1,0 +1,825 @@
+body {
+    overflow: hidden;
+}
+
+.main {
+    position: relative;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding-top: 42px;
+    font-size: 12px;
+    height: 100%;
+    overflow: hidden;
+}
+
+/*::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+}*/
+
+.icon {
+    margin-right: 3px;
+}
+
+.navbar-nav > li > a {
+    padding: 10px;
+}
+
+.content {
+    margin: 10px;
+}
+
+.sidebar-nav {
+    position: fixed;
+    width: 200px;
+    left: 0px;
+    /*height: 100%;*/
+    top: 42px;
+    padding: 10px;
+    font-size: 12px;
+    font-family: '微软雅黑';
+    overflow-y: scroll;
+    bottom: 120px;
+    border-bottom: 1px solid #ccc;
+
+}
+
+.sidebar-nav-right {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    right: 0;
+    top: 0px;
+    overflow: auto;
+    padding-top: 42px;
+}
+
+.sidebar-nav-right .row {
+    margin: 0;
+}
+
+.sidebar-nav-right .row li {
+    padding: 8px 10px 0 8px;
+    margin: 0;
+}
+
+.sidebar-nav-right .row li a {
+    border: 0 none;
+    background: none;
+}
+
+.sidebar-nav li .draglist:hover {
+    background: #ccc
+}
+
+.sidebar-nav .nav-header {
+    color: #fff;
+}
+
+.sidebar-nav li {
+    line-height: 25px;
+}
+
+.draglist {
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+.chartname {
+    text-align: center;
+}
+
+.inptext {
+    margin: 1px 5px 2px 0;
+    cursor: pointer;
+    position: relative;
+    /* line-height: 22px;
+     height: 22px;*/
+    max-width: 465px;
+    /*border: 1px solid #EDB8B8;
+    background: #FFEAEA;
+    color: #c30;*/
+    border-radius: 3px;
+    /*padding: 3px 20px 3px 10px;*/
+    font-size: 14px;
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #ccc;
+
+}
+
+.inptext em {
+    font-style: normal;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0 3px;
+}
+
+.dragContentInput {
+    width: auto;
+    border: 0 none;
+    /*position: absolute;
+    top: -2px;*/
+    float: left;
+    height: 33px;
+}
+
+.bdblue {
+    border-bottom: 2px solid #BDC3C7;
+    position: relative;
+    /*height: 35px;*/
+    line-height: 35px;
+    /*overflow: hidden;*/
+    padding-left: 0px;
+}
+
+.chart {
+    width: 200px;
+    height: 200px;
+}
+
+.drag-content {
+    position: relative;
+    height: 100%;
+}
+
+.line-h {
+    height: 100%;
+    border-left: 1px dashed #ccc;
+    width: 1px;
+    position: absolute;
+    z-index: 0;
+}
+
+.line-w {
+    width: 100%;
+    border-top: 1px dashed #ccc;
+    height: 1px;
+    position: absolute;
+    z-index: 0;
+}
+
+/*/!*鼠标右键*!/
+.rightMenu {
+    border: 1px solid #999;
+    background: #fff;
+    display: block;
+    /!*box-shadow: 3px 6px 12px #ABABAB;*!/
+    position: fixed;
+    display: none;
+}*/
+
+.setpage {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    z-index: 1050;
+    width: 560px;
+    margin-left: -280px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+    outline: none;
+}
+
+.setpage .modal-header h3 {
+    font-size: 24px;
+    padding: 0;
+    margin: 0;
+}
+
+.pagelabel {
+    text-align: right;
+    font-size: 16px;
+
+}
+
+.setpage input {
+    border: 0 none;
+
+}
+
+.setpage .pagename {
+    height: 33px;
+}
+
+.w80 {
+    width: 70%;
+}
+
+input[type=radio].tabradio {
+    margin-top: 10px;
+}
+
+.radio-inline.radioml {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.dropnav {
+    top: 43px;
+    background: #4A5E71;
+    z-index: 1;
+}
+
+.dropnavul > li > a {
+    padding: 5px 10px;
+}
+
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: #fff;
+}
+
+.editor-down {
+    width: 300px;
+}
+
+.editor-down li {
+    padding: 10px 10px 0 10px;
+}
+
+.navbar-inverse .navbar-nav > .open > .editor-down li a {
+    color: #333;
+}
+
+.sidebar-nav-right-title {
+    font-size: 16px;
+    margin: 20px 0 0 10px;
+}
+
+.sidebar-nav-right-con {
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 20px;
+}
+
+.edlabel {
+    width: 115px;
+}
+
+.choosecharted label {
+    color: #aaa;
+}
+
+.chartshade {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    z-index: 2;
+}
+
+.panel-body-xy,.setcolumncon {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.panel-body-xy .edlabel {
+    width: 115px;
+    text-align: right;
+}
+
+.bdblue,.setcolumnright{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1
+}
+
+.xy-icon-down {
+    /*position: absolute;
+    right: 7px;
+    top: 2px;*/
+    margin-top: -9px;
+    font-size: 16px;
+
+}
+
+.xy-downul, .xy-downul li ul {
+    position: absolute;
+    left: 0;
+    top: 22px;
+    background: #fff;
+    border: 1px solid #ccc;
+    min-width: 100%;
+    z-index: 10005;
+    /*padding: 0 10px;*/
+    display: none;
+}
+
+.xy-downul li {
+    position: relative;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.xy-downul li ul {
+    left: 100%;
+    top: 0;
+}
+
+.xy-downul .active {
+    background: #ccc
+}
+
+.xy-img {
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+}
+
+.xy-icon-right {
+    position: absolute;
+    right: 12px;
+    top: 9px;
+    font-size: 16px;
+    color: #928F8F;
+}
+
+.glyphicon-erase:before {
+    content: "\e221";
+}
+
+.delallxy {
+    float: right;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.colorchoose {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 120px;
+    width: 200px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+	background: #fff;
+}
+
+.colortitle {
+    background: #ecf0f1;
+    border-bottom: 1px solid #ccc;
+    font-size: 12px;
+}
+
+.colorinp {
+    width: 116px;
+    border: 0 none;
+}
+
+.dragcolortip {
+    color: #A9A4A4;
+}
+
+.colorcon {
+    padding: 10px 0;
+}
+
+.xychangeall {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.pictitle {
+    font-size: 12px;
+    color: #555;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+.disabledrag {
+    color: #bbb;
+}
+
+.choosechartfalse {
+    /*padding: 35px 0;*/
+   
+    /*line-height: 68px;*/
+    text-align: center;
+    font-size: 14px;
+}
+
+.setxyhegiht {
+    /*height: 148px;*/
+    height: auto;
+    margin-bottom: 0;
+}
+
+/*.goback {
+    position: fixed;
+    top: 100px;
+    left: 206px;
+    z-index: 9999;
+    width: 51px;
+    height: 62px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    text-align: center
+}*/
+.goback,.setcolumn {
+    position: fixed;
+    top: 55px;
+    left: 162px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.showgoicon {
+    font-size: 18px;
+    position: relative;
+}
+
+.gomeasure {
+    position: absolute;
+    left: 5px;
+    top: -11px;
+}
+
+.godimension {
+    position: absolute;
+    left: -6px;
+    top: 13px;
+}
+
+.gocondition {
+    position: absolute;
+    left: 19px;
+    top: 35px;
+}
+
+.showgocon{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    width: 53px;
+    height: 53px;
+    font-size: 12px;
+}
+
+.goback:hover .showgocon{
+    display: block;
+}
+    
+.goback a {
+    display: block;
+}
+
+.showgocon {
+    display: none;
+}
+
+/*.goback .ileft {
+    position: absolute;
+    left: -7px;
+    top: 15px;
+    font-size: 20px;
+    line-height: 10px;
+    color: #ccc;
+    background: #fff;
+    font-weight: 100;
+}*/
+
+
+/*
+.drag-content {
+    margin-top: 183px;
+}*/
+
+.drag-charts {
+    /*position: fixed;
+    left: 223px;
+    top: 43px;*/
+    line-height: 68px;
+    z-index: 101;
+    padding-top: 10px;
+    background: #fff;
+}
+
+.setxyhegiht .panel-title {
+   font-size: 14px;
+}
+
+.setxyhegiht .panel-body {
+    padding: 5px;
+}
+
+.panel-body-xy .edlabel {
+    font-size: 12px;
+}
+
+.panel-body-xy .dragContentInput {
+    padding: 0;
+    height: 26px;
+}
+
+.conbody {
+    width: 100%;
+    overflow:auto;
+    border: 1px solid #ccc;
+    /*border-radius: 5px;*/
+    margin-top: 10px;
+}
+
+.setxyhegiht .bdblue {
+    border-bottom: 1px solid #BDC3C7;
+    line-height: 27px;
+}
+
+.setxyhegiht .bdblue.bdnone {
+    border:0 none;
+}
+
+.setxyhegiht .bdblue .radio-inline.radioml {
+    
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.setxyhegiht .bdblue input[type=radio].tabradio {
+    margin-top: 0;
+
+}
+
+.system {
+    position: fixed;
+    margin: 20px 0 0 0;
+    top: -100%;
+    left: 2.5%;
+    height: 100%;
+    z-index: 9999;
+    width: 95%;
+    background: #fff;
+    opacity: 0;
+    border: 0 none;
+}
+
+.system .line-h,.system .line-w {
+    display: none;
+}
+
+.closesystem {
+    position: fixed;
+    right: 2px;
+    top: 2px;
+    font-size: 18px;
+    z-index: 9999;
+    color: #34495E;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    background: #fff;
+    border: 3px solid #34495E;
+    text-align: center;
+    line-height: 18px;
+    cursor: pointer;
+}
+
+.bgwhite.modal-backdrop.in {
+    background: #fff;
+    opacity: 1;
+}
+
+.saveprogress {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 50%;
+    height: 25px;
+    opacity: 1;
+}
+
+.saveprogressbar {
+    position: absolute;
+    left: 0%;
+    top: 0;
+    height: 25px;
+    width: 0%;
+    background: red;
+    text-align: center;
+    color:#fff;
+}
+
+.savepagetitle {
+    color: #fff;
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    text-align: center;
+    top: 25%;
+}
+
+.setcolumnleft {
+    /*width: 200px;*/
+    width:150px;
+    padding: 10px;
+    font-size: 12px;
+    height: 353px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    margin-right: 0;
+}
+
+.setcolumnright {
+    margin-left: 0;
+    padding: 10px;
+}
+
+.setcolumnbtns {
+    padding-top: 10px;
+
+}
+
+.columnbefore,.columnafter {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.setcolumntabs {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.setcolumnrign-con {
+    float: left;
+    width:45%;
+    margin: 2.5%;
+}
+
+.choosecolname {
+    width: 100%;
+    border-bottom: 1px dashed #ccc;
+}
+
+.choosecolul {
+    max-height: 235px;
+    overflow: auto;
+    margin-top: 10px;
+}
+
+.choosecolul li {
+    width:50%;
+    float: left;
+    font-size: 12px;
+    height: 24px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 10px;
+    padding-right: 10px;
+}
+
+.choosecolul li span {
+    margin-right: 5px;
+}
+
+.choosecolul li input {
+    margin-left: 5px;
+    border: 1px solid  #ccc;
+    border-radius: 3px;
+    padding: 0 5px;
+}
+
+.setcolumnright .alert-info {
+    font-size: 12px;
+    padding:3px;
+}
+
+.close-setcolumn {
+    margin: 5px 5px 0 0;
+}
+
+.setcolumn-confirm {
+    width: 830px;
+    margin-left: -415px;
+}
+
+.formerly,.alias {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    max-width: 150px;
+    overflow: hidden;
+}
+
+.green {
+    color:#16a085;
+}
+
+.navbar-collapse .navbar-nav.navbar-right:last-child{
+    margin-right: 0;
+}
+
+.setpagestyle {
+    padding:15px;
+}
+
+.label-group .label-group-left{
+    float: left;
+    width:80%;
+}
+
+.label-group .label-group-right {
+    float: left;
+    width:20%;
+}
+
+.add-input,.del-input {
+    font-size: 24px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.del-input {
+    color:red;
+}
+
+.speedometerinstrument-inp {
+    height: 22px;
+    vertical-align: middle;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding:0 5px;
+    line-height: 24px;
+    width: 80px;
+    margin-right: 5px;
+}
+
+.SpeedometerInstrumentsubmit {
+    padding: 3px;
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+.error {
+    border-color: red;
+}
+
+.pageshare {
+    float: right;
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.chooseinfo {
+    font-size: 12px;
+    padding: 3px;
+    margin: 10px;
+}
+
+.chooseinfo h4 {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.sharecontent input[type='checkbox'] {
+    margin:0 5px 0 0;
+}
+
+.sharecontent {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.shareul li {
+    float: left;
+    width: 25%;
+    padding-right: 10px;
+    
+}
+
+.shareul li label {
+    font-size: 12px;
+    overflow: auto;
+}
+
+.bdnone {
+    border: 0 none;
+}

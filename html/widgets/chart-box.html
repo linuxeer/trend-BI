@@ -1,0 +1,27 @@
+<div ng-mouseleave = "menuShown = false;subMenuShown = false;" keydown-listen ng-delete-fn = "delete_fn($event)" class = "chart-box pa" style = "z-index: 1;user-select:none;" onselectstart = "return false">
+    <div class = "w h pa highchart-box" style = "left:0px;top:0px;z-index: -1"></div>
+    <div ng-show = "!isPreviewing" ng-right-click = "rightclick()" move-able resize-able select-able class = "w h pa interactive" style = "left:0px;top:0px;z-index: 100"></div>
+    <div class = "title-edit" ng-show = "title_edit_show">
+        <input type = "text" class = "mr10" style = "" ng-model = "title"/>
+        <b style = "color:#fff;font-size: 14px;cursor: pointer" ng-click = "title_confirm()">确定</b>
+        <b style = "color:#ddd;font-size: 14px;cursor: pointer" ng-click = "title_cancel()">取消</b>
+    </div>
+    <span class = "pa r0 b0 f13" ng-click = "back()" ng-show = "drillQuery.layerNum">
+        <span class = "icon icon-reply cp">返回</span>
+    </span>
+    <span ng-show = "isPreviewing" class = "glyphicon glyphicon-list cp" style = "position: absolute;right: 0px;top:0px;" ng-click = "showMenu()"></span>
+    <div class = "chart-box-menu f14" ng-show = "menuShown" style = "position: absolute;right: 22px;top:0px;width:100px;z-index: 1000;">
+        <ul>
+            <li ng-repeat = "i in operMenus" ng-click = "i.fn()" ng-mouseover = "showSubMenu($index)">
+                <a class = "ml10 cp">{{i.text}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class = "chart-box-menu f14" ng-show = "subMenuShown" style = "position: absolute;right: 125px;top:{{top}};width:100px;z-index: 1000;">
+        <ul>
+            <li ng-repeat = "i in submenus" ng-click = "i.fn()">
+                <a class = "ml10 cp">{{i.text}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

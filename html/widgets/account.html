@@ -1,0 +1,58 @@
+<div class = "container-fluid content">
+    <div class = "setpage" ng-show="isShow">
+        <div class = "modal-header">
+            <h3>
+                {{title}}
+            </h3>
+        </div>
+        <div class = "modal-body  clearfix">
+            <div class = "form-group clearfix" ng-show="!role">
+                <label class = "col-sm-3 control-label pagelabel">{{pagename}}:</label>
+                <!--表-->
+                <div class = "col-sm-9" ng-show="managetype">
+                    <input type = "text" class = "form-control" ng-model="tableName" placeholder = "请勾选下列表" readonly style="color:#000">
+                </div>
+                <!--角色-->
+                <div class = "col-sm-9" ng-show="!managetype" >
+                    <input type = "text" class = "form-control" ng-model="name" placeholder = "账号名称" style="border: 2px solid #bdc3c7;">
+                </div>
+                <div class = "form-group" ng-show="!managetype" >
+                    <label class = "col-sm-3 control-label pagelabel">姓名:</label>
+                    <div class = "col-sm-9">
+                        <input type = "text" class = "form-control" ng-model="contactName" placeholder = "姓名" style="border: 2px solid #bdc3c7;">
+                    </div>
+                </div>
+            </div>
+            <!--添加表-->
+            <div class = "form-group clearfix" ng-show="managetype">
+                <label class = "col-sm-3 control-label pagelabel">所有表:</label>
+                <div class = "col-sm-9">
+                    <div class="checkbox  tableSelect">
+                        <label ng-repeat="item in tablelist track by $index"  style="margin-left: 10px;">
+                            <input type="checkbox" style="margin-top:10px;" ng-click="isChecked($event)" id="{{item.tabid}}" value="{{item.tableDesc}}" class="{{item.tabletype}}">{{item.tableDesc}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--角色部门-->
+            <div class = "form-group clearfix" ng-show="role">
+                <label class = "col-sm-3 control-label pagelabel">{{pagetype}}:</label>
+                <div class = "col-sm-9">
+                    <div class="checkbox">
+                        <label ng-repeat="item in roleListView"  style="margin-left: 10px;">
+                            <input type="checkbox" style="margin-top:10px;" id="{{item.roleId}}" ng-click="checkRole($event)"  value="{{item.roleName}}">{{item.roleName}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "modal-footer">
+            <button class = "btn" ng-click = "close()">
+                关闭
+            </button>
+            <button class = "btn btn-primary" ng-click = "savepage()">
+                保存
+            </button>
+        </div>
+    </div>
+</div>

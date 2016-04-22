@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "utf-8">
+        <title>大数据可视化系统</title>
+        <meta name = "apple-mobile-web-app-capable" content = "yes"/>
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name = "apple-mobile-web-app-capable" content = "yes">
+        <meta name = "apple-mobile-web-app-status-bar-style" content = "black">
+        <meta content = "telephone=no" name = "format-detection">
+        <meta name = "screen-orientation" content = "portrait">
+        <link href = "../css/base.css" rel = "stylesheet">
+        <link href = "../css/common.css" rel = "stylesheet">
+        <link href = "../libs/css/vendor/bootstrap/css/bootstrap.min.css" rel = "stylesheet">
+        <link href = "../libs/css/flat-ui.css" rel = "stylesheet">
+        <link href = "../libs/css/font-awesome.css" rel = "stylesheet">
+        <link rel = "shortcut icon" href = "../images/trend-BI.ico" type = "image/x-icon"/>
+        <style>
+            .top-header {
+                width: 100%;
+                height: 60px;
+                line-height: 60px;
+                background-color: #34495e;
+                color: #fff;
+                font-size: 25px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body ng-controller = "loginCtrl">
+        <div class = "top-header">
+            <b>杭州趋数网络科技有限公司</b>
+        </div>
+        <div class = "col-md-4 col-sm-offset-4" style = "position:absolute;top:30%;">
+            <form class = "form-horizontal" role = "form">
+                <div class = "form-group">
+                    <label for = "" class = "col-lg-2 control-label">账号</label>
+                    <div class = "col-lg-10">
+                        <input type = "text" class = "form-control" id = "" placeholder = "Email" ng-model = "userName">
+                    </div>
+                </div>
+                <div class = "form-group">
+                    <label for = "" class = "col-lg-2 control-label">密码</label>
+                    <div class = "col-lg-10">
+                        <input type = "password" class = "form-control" id = "" placeholder = "Password" ng-model = "password">
+                    </div>
+                </div>
+                <div class = "form-group">
+                    <div class = "col-lg-offset-2 col-lg-10">
+                        <label class = "checkbox" for = "checkbox3">
+                            <input type = "checkbox" data-toggle = "checkbox" value = "" id = "checkbox3" class = "custom-checkbox">
+                            <span class = "icons">
+                                <span class = "icon-unchecked"></span>
+                                <span class = "icon-checked"></span>
+                            </span>
+                            记住我
+                        </label>
+                    </div>
+                </div>
+                <div class = "form-group">
+                    <div class = "col-lg-offset-2 col-lg-10">
+                        <button type = "button" class = "btn btn-primary btn-block" ng-click = "login()">登陆</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <my-dialog></my-dialog>
+        <script src = "../libs/js/vendor/jquery.min.js"></script>
+        <script src = "../libs/js/flat-ui.min.js"></script>
+        <script src = "../libs/js/angular.min.js"></script>
+        <script src = "../libs/js/angular-route.min.js"></script>
+        <script src = "../libs/js/ng-table.js"></script>
+        <!--<script src = "../libs/js/Highcharts/js/highcharts.js"></script>--><!--<script src = "../libs/js/Highcharts/js/themes/theme-all.js"></script>-->
+        <script src = "../js/theme.js"></script>
+        <script src = "../libs/js/md5.js"></script>
+        <script>
+            var SERVICES = angular.module("SERVICES", []);
+            var DIRECTIVES = angular.module("DIRECTIVES", ["SERVICES"]);
+        </script>
+        <script src = "../js/services.js"></script>
+        <script src = "../js/directives.js"></script>
+        <script>
+            var MAIN = angular.module("MAIN", ["DIRECTIVES", "SERVICES", "ngRoute", "ngTable"]);
+        </script>
+        <script src = "../js/login.js"></script>
+        <script>
+            angular.bootstrap(document, ['MAIN']); // administration
+        </script>
+    </body>
+</html>

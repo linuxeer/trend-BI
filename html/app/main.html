@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>大数据可视化</title>
+        <meta name = "viewport" content = "initial-scale=1, maximum-scale=1">
+        <link href = "../../css/base.css" rel = "stylesheet">
+        <link href = "../../css/app/common.css" rel = "stylesheet">
+        <link href = "../../css/app/charts.css" rel = "stylesheet">
+        <link href = "../../css/app/home.css" rel = "stylesheet">
+        <!--日期组件样式-->
+        <link href = "../../libs/datepicker/themes/default.css" rel = "stylesheet">
+        <link href = "../../libs/datepicker/themes/default.date.css" rel = "stylesheet">
+        <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    </head>
+    <body ng-controller = "mainCtrl">
+        <div ng-view></div>
+        <info></info>
+        <script src = "../../libs/js/jquery-1.7.1.min.js"></script>
+        <script src = "../../libs/js/angular.min.js"></script>
+        <script src = "../../libs/js/angular-route.min.js"></script>
+        <script src = "../../libs/js/angular-sanitize.min.js"></script>
+        <script src = "../../libs/js/ng-table.js"></script>
+        <script src = "../../libs/js/Highcharts/js/highcharts.js"></script>
+        <script src = "http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
+        <script src = "http://img.hcharts.cn/highcharts/modules/data.js"></script>
+        <script src = "http://img.hcharts.cn/highcharts/modules/drilldown.js"></script>
+        <script src = "../../libs/js/Highcharts/js/themes/theme-all.js" class = "themesjs"></script>
+        <script src = "../../libs/js/echarts.min.app.js"></script>
+        <script src = "../../libs/datepicker/picker.js"></script>
+        <script src = "../../libs/datepicker/picker.date.js"></script>
+        <script src = "../../libs/datepicker/legacy.js"></script>
+        <script>
+            var SERVICES = angular.module("SERVICES", []);
+            var DIRECTIVES = angular.module("DIRECTIVES", ["SERVICES"]);
+        </script>
+        <script src = "../../js/app/services.js"></script>
+        <script src = "../../js/app/directives.js"></script>
+        <script>
+            var MAIN = angular.module("MAIN", ["DIRECTIVES", "SERVICES", "ngRoute", "ngTable"]);
+        </script>
+        <script src = "../../js/app/main.js"></script>
+        <script src = "../../js/app/home.js"></script>
+        <script src = "../../js/app/charts.js"></script>
+        <script>
+            MAIN.config(['$routeProvider', function ($routeProvider) {
+                $routeProvider.when('/charts', {
+                    templateUrl: '/trend-BI/html/app/charts.html',
+                    controller: 'chartsCtrl'
+                }).when('/login', {
+                    templateUrl: '/trend-BI/html/app/login.html',
+                    controller: 'loginCtrl'
+                }).when('/home', {
+                    templateUrl: '/trend-BI/html/app/home.html',
+                    controller: 'homeCtrl'
+                }).otherwise({
+                    redirectTo: '/index'
+                });
+            }]);
+            angular.bootstrap(document, ['MAIN']);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "utf-8">
+        <title>大数据可视化系统</title>
+        <meta name = "apple-mobile-web-app-capable" content = "yes"/>
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name = "apple-mobile-web-app-capable" content = "yes">
+        <meta name = "apple-mobile-web-app-status-bar-style" content = "black">
+        <meta content = "telephone=no" name = "format-detection">
+        <meta name = "screen-orientation" content = "portrait">
+        <link href = "../css/base.css" rel = "stylesheet">
+        <link href = "../css/common.css" rel = "stylesheet">
+        <link href = "../libs/css/vendor/bootstrap/css/bootstrap.min.css" rel = "stylesheet">
+        <link href = "../libs/css/flat-ui.css" rel = "stylesheet">
+        <link href = "../libs/css/font-awesome.css" rel = "stylesheet">
+        <link rel = "shortcut icon" href = "../images/trend-BI.ico" type = "image/x-icon"/>
+    </head>
+    <body>
+        <div ng-view></div>
+        <my-dialog></my-dialog>
+        <full-screen></full-screen>
+        <context-menu></context-menu>
+        <script src = "../libs/js/vendor/jquery.min.js"></script>
+        <script src = "../libs/js/html2canvas.min.js"></script>
+        <script src = "../libs/js/flat-ui.min.js"></script>
+        <script src = "../libs/js/angular.min.js"></script>
+        <script src = "../libs/js/angular-route.min.js"></script>
+        <script src = "../libs/js/angular-sanitize.min.js"></script>
+        <script src = "../libs/js/ng-table.js"></script>
+        <script src = "../libs/js/Highcharts/js/highcharts.js"></script>
+        <script src = "http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
+        <script src = "../libs/js/Highcharts/js/themes/theme-all.js" class = "themesjs"></script>
+        <script>
+            var SERVICES = angular.module("SERVICES", []);
+            var DIRECTIVES = angular.module("DIRECTIVES", ["SERVICES"]);
+        </script>
+        <script src = "../js/services.js"></script>
+        <script src = "../js/directives.js"></script>
+        <script>
+            var MAIN = angular.module("MAIN", ["DIRECTIVES", "SERVICES", "ngRoute", "ngTable"]);
+        </script>
+        <script src = "../js/main.js"></script>
+        <script src = "../js/login.js"></script>
+        <script src = "../js/editor.js"></script>
+        <script src = "../js/editor-inner.js"></script>
+        <script src = "../js/product.js"></script>
+        <script src = "../js/index.js"></script>
+        <script src = "../js/manage.js"></script>
+        <script>
+            MAIN.config(['$routeProvider', function ($routeProvider) {
+                $routeProvider.when('/product', {
+                    templateUrl: '/trend-BI/html/product.html',
+                    controller: 'productCtrl'
+                }).when('/editor', {
+                    templateUrl: '/trend-BI/html/editor.html',
+                    controller: 'editorCtrl'
+                }).when('/index', {
+                    templateUrl: '/trend-BI/html/index.html',
+                    controller: 'lookCtrl'
+                }).when('/manage', {
+                    templateUrl: '/trend-BI/html/manage.html',
+                    controller: 'manageCtrl'
+                }).otherwise({
+                    redirectTo: '/editor'
+                });
+            }]);
+            angular.bootstrap(document, ['MAIN']);
+        </script>
+    </body>
+</html>
